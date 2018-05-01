@@ -1,6 +1,8 @@
 # Blog
 
-Just a playground to trying out ideas and learning Laravel(5.6).
+Just a playground to trying out ideas and learning Laravel(5.6). 
+
+Live site at http://159.89.227.137
 
 ## Installation
  
