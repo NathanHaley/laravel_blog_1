@@ -64510,6 +64510,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -64544,8 +64560,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             data.append('avatar', avatar);
 
             axios.post('/api/users/' + this.username + '/avatar', data).then(function (data) {
+                //Update avatar in the nav
                 $('#nav_avatar').attr('src', data.data[0]);
+
                 _this.avatar_file = data.data[0];
+
                 flash('Avatar uploaded! Try refreshing page if you don\'t see changes');
             });
         }
@@ -64641,6 +64660,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("input", {
+    staticClass: "form-control-file",
     attrs: { type: "file", accept: "image/*" },
     on: { change: _vm.onChange }
   })
@@ -64663,35 +64683,55 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c(
-      "div",
-      [
-        _c("avatar", {
-          attrs: {
-            "with-link": "no",
-            username: _vm.username,
-            avatar_path: _vm.avatar_file
-          }
-        })
-      ],
-      1
-    ),
-    _vm._v(" "),
+  return _c("div", { staticClass: "bg-light rounded" }, [
     _c(
       "form",
       {
-        staticClass: "mt-3",
+        staticClass: "form-inline",
         attrs: { method: "POST", enctype: "multipart/form-data" }
       },
       [
-        _c("image-upload", {
-          staticClass: "mr-1",
-          attrs: { name: "avatar" },
-          on: { loaded: _vm.onLoad }
-        })
-      ],
-      1
+        _c(
+          "div",
+          { staticClass: "form-group mb-2" },
+          [
+            _c(
+              "label",
+              { staticClass: "p-2", attrs: { for: "inputAvatar" } },
+              [
+                _c("avatar", {
+                  attrs: {
+                    "with-link": "no",
+                    username: _vm.username,
+                    avatar_path: _vm.avatar_file
+                  }
+                })
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c("image-upload", {
+              staticClass: "form-control mr-1 border-0 bg-light",
+              attrs: { name: "avatar", id: "inputAvatar" },
+              on: { loaded: _vm.onLoad }
+            })
+          ],
+          1
+        )
+      ]
+    ),
+    _vm._v(" "),
+    _c(
+      "small",
+      {
+        staticClass: "form-text text-muted p-2",
+        attrs: { id: "inputAvatarHelp" }
+      },
+      [
+        _vm._v(
+          "\n        Must be an image file, jpg/jpeg/png, and less than 10kb.\n    "
+        )
+      ]
     )
   ])
 }

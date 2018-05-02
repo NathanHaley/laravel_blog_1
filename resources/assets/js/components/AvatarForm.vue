@@ -1,13 +1,29 @@
 <template>
-    <div>
-        <div>
-            <avatar with-link="no" :username="username" :avatar_path="avatar_file"></avatar>
-        </div>
+    <div class="bg-light rounded">
+        <form method="POST" enctype="multipart/form-data" class="form-inline">
+            <div class="form-group mb-2">
 
-        <form method="POST" enctype="multipart/form-data" class="mt-3">
-            <image-upload name="avatar" class="mr-1" @loaded="onLoad"></image-upload>
+                <label class="p-2"
+                       for="inputAvatar">
+
+                    <avatar with-link="no"
+                            :username="username"
+                            :avatar_path="avatar_file">
+                    </avatar>
+                    
+                </label>
+
+                <image-upload name="avatar"
+                              id="inputAvatar"
+                              class="form-control mr-1 border-0 bg-light"
+                              @loaded="onLoad">
+                </image-upload>
+
+            </div>
         </form>
-
+        <small id="inputAvatarHelp" class="form-text text-muted p-2">
+            Must be an image file, jpg/jpeg/png, and less than 10kb.
+        </small>
     </div>
 </template>
 
@@ -28,7 +44,7 @@
         //     }
         // },
 
-        components: { ImageUpload },
+        components: {ImageUpload},
 
         methods: {
             onLoad(avatar) {
@@ -45,8 +61,11 @@
                 axios.post(`/api/users/${this.username}/avatar`, data)
                     .then(
                         (data) => {
+                            //Update avatar in the nav
                             $('#nav_avatar').attr('src', data.data[0]);
+
                             this.avatar_file = data.data[0];
+
                             flash('Avatar uploaded! Try refreshing page if you don\'t see changes');
                         });
             }

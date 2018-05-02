@@ -1,5 +1,5 @@
 <template>
-    <input type="file" accept="image/*" @change="onChange">
+    <input type="file" class="form-control-file" accept="image/*" @change="onChange">
 </template>
 
 <script>
