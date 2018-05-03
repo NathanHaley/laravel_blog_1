@@ -11,8 +11,31 @@
                 <h1>Create A Post</h1>
                 <hr>
 
-                <form method="POST" action="/post">
+                <form method="POST" enctype="multipart/form-data" action="/post">
                     @csrf
+
+                    <div class="form-group">
+                        <label for="channel">Channel</label>
+                        <select name="channel_id" class="form-control" id="channel_id" required>
+                            <option value="">Pick One</option>
+                            @foreach($channels as $channel)
+                                <option value="{{ $channel->id }}"
+                                        @if(old('channel_id') == $channel->id) selected @endif>{{ $channel->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="banner_image">Banner Image</label>
+                        <input name="banner_image" type="file" class="form-control" id="banner_image">
+                        <small id="banner_imageHelp" class="form-text text-muted"></small>
+                    </div>
+                    <div class="form-group">
+                        <label for="card_image">Card Image</label>
+                        <input name="card_image" type="file" class="form-control" id="card_image">
+                        <small id="card_imageHelp" class="form-text text-muted"></small>
+                    </div>
+
                     <div class="form-group">
                         <label for="title">Title</label>
                         <input name="title" type="input" class="form-control" id="title"
@@ -26,16 +49,7 @@
                                   placeholder="Just the interesting bits go here..."
                                   required>{{ old('lede') }}</textarea>
                     </div>
-                    <div class="form-group">
-                        <label for="channel">Channel</label>
-                        <select name="channel_id" class="form-control" id="channel_id" required>
-                            <option value="">Pick One</option>
-                            @foreach($channels as $channel)
-                                <option value="{{ $channel->id }}"
-                                        @if(old('channel_id') == $channel->id) selected @endif>{{ $channel->name }}</option>
-                            @endforeach
-                        </select>
-                    </div>
+
                     <div class="form-group">
                         <label for="body">Body</label>
                         <wysiwyg id="body" name="body" value="{{ old('body') }}" placeholder="The main body of your post..."></wysiwyg>

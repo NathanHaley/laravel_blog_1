@@ -18,6 +18,9 @@
     @can('update', $post)
         <div class="card-footer">
             <a href="{{ route('post.edit', $post) }}" class="btn btn-outline-primary btn-sm">Edit</a>
+            @can('delete', $post)
+                <a href="{{ route('post.delete', $post) }}" class="btn btn-outline-danger btn-xs">Delete</a>
+            @endcan
         </div>
     @endcan
 </div>

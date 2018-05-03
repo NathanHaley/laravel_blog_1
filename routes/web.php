@@ -31,6 +31,8 @@ Route::get('/register/confirm', 'Auth\RegisterConfirmationController@index')->na
 
 Route::get('post/create', 'PostController@create')->middleware('must-be-confirmed')->name('post.create');
 Route::get('post/{post}/edit', 'PostController@edit')->name('post.edit');
+Route::get('post/{post}/delete', 'PostController@delete')->name('post.delete');
+Route::delete('post/{post}', 'PostController@destroy')->name('post.destroy');
 Route::patch('post/{post}', 'PostController@update');
 Route::post('post', 'PostController@store');
 Route::get('post/{post}/show', 'PostController@show')->name('post.show');

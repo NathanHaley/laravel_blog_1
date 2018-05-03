@@ -4,6 +4,8 @@ namespace App;
 
 use App\Events\UserPublishedNewPost;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 
 class Post extends Model
@@ -27,7 +29,29 @@ class Post extends Model
         static::created(function ($post) {
             event(new UserPublishedNewPost($post));
         });
+
+        static::deleting(function ($post) {
+            $post->removeBannerImage();
+            $post->removeCardImage();
+        });
     }
+
+    public function removeBannerImage()
+    {
+        if ($this->banner_path != null) {
+            Storage::disk('public')->delete($this->banner_path);
+            $this->banner_path = null;
+        }
+    }
+
+    public function removeCardImage()
+    {
+        if ($this->card_path != null) {
+            Storage::disk('public')->delete($this->card_path);
+            $this->card_path = null;
+        }
+    }
+
 
     /**
      * Get the route key name for Laravel.
@@ -78,6 +102,8 @@ class Post extends Model
                 $id === null ? '' : Rule::unique('posts')->ignore($id),
                 'max:100',
             ],
+            'banner_image' => 'image|max:10000',
+            'card_image' => 'image|max:5000',
             'lede' => 'required|max:250',
             'body' => 'required|max:65000',
             'channel_id' => 'required|exists:channels,id'

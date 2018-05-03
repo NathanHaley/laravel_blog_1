@@ -4,9 +4,31 @@
     <h1>Edit Post</h1>
     <hr>
 
-    <form method="POST" action="/post/{{ $post->slug }}">
+    <form method="POST" enctype="multipart/form-data" action="/post/{{ $post->slug }}">
         @method('PATCH')
         @csrf
+
+        <div class="form-group">
+            <label for="channel">Channel</label>
+            <select name="channel_id" class="form-control" id="channel_id" required>
+                <option value="">Pick One</option>
+                @foreach($channels as $channel)
+                    <option value="{{ $channel->id }}"
+                            @if(old('channel_id') ?? $post->channel_id == $channel->id) selected @endif>{{ $channel->name }}</option>
+                @endforeach
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="banner_path">Banner Image</label>
+            <input name="banner_path" type="file" class="form-control" id="banner_path" value="{{ old('banner_path') ?? $post->banner_path }}">
+            <small id="banner_pathHelp" class="form-text text-muted"></small>
+        </div>
+        <div class="form-group">
+            <label for="card_path">Card Image</label>
+            <input name="card_path" type="file" class="form-control" id="card_path" value="{{ old('card_path') ?? $post->card_path }}">
+            <small id="card_pathHelp" class="form-text text-muted"></small>
+        </div>
 
         <div class="form-group">
             <label for="title">Title</label>
@@ -21,16 +43,7 @@
                       placeholder="Just the interesting bits go here..."
                       required>{{ old('lede') ?? $post->lede }}</textarea>
         </div>
-        <div class="form-group">
-            <label for="channel">Channel</label>
-            <select name="channel_id" class="form-control" id="channel_id" required>
-                <option value="">Pick One</option>
-                @foreach($channels as $channel)
-                    <option value="{{ $channel->id }}"
-                            @if(old('channel_id') ?? $post->channel_id == $channel->id) selected @endif>{{ $channel->name }}</option>
-                @endforeach
-            </select>
-        </div>
+
         <div class="form-group">
             <label for="body">Body</label>
             <wysiwyg id="body" name="body" value="{{ old('body') ?? $post->body }}"></wysiwyg>

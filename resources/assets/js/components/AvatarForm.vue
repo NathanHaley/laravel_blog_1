@@ -10,7 +10,7 @@
                             :username="username"
                             :avatar_path="avatar_file">
                     </avatar>
-                    
+
                 </label>
 
                 <image-upload name="avatar"

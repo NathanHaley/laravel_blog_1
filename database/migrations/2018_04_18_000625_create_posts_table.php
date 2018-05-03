@@ -25,6 +25,10 @@ class CreatePostsTable extends Migration
             $table->string('lede', 255);
             $table-> text('body');
             $table->boolean('locked')->default(false);
+            $table->string('card_path')->nullable();
+            $table->string('banner_path')->nullable();
+            $table->boolean('featured_banner')->default(false);
+            $table->boolean('featured_card')->default(false);
             $table->timestamps();
         });
 

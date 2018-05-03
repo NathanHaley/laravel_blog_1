@@ -8,6 +8,14 @@
     <post-show :post="{{ $post }}" inline-template>
         <div class="container">
             <div class="col-md-12">
+                <div class="alert-danger rounded p-4">
+                    Are you sure you would like to remove this post permanently?
+                    <form action="{{route('post.destroy', $post)}}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger mt-4">Yes</button>
+                    </form>
+                </div>
 
                 <div class="text-center">
                     <h1 class="h1">
@@ -47,10 +55,6 @@
                         <a href="{{ route('post.edit', $post) }}" class="btn btn-outline-primary h-25 ml-3">Edit</a>
 
                     @endcan
-                    @can('delete', $post)
-                        <a href="{{ route('post.delete', $post) }}" class="btn btn-outline-danger h-25 ml-3">Delete</a>
-                    @endcan
-
 
                 </div>
                 <br>

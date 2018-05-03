@@ -1,10 +1,11 @@
 @extends('layouts.blog')
 
+
 @section('content')
 
-        @include('blog.jumbotron')
+    @include('blog.jumbotron')
 
-        @include('blog.featured')
+    @include('blog.featured')
 
     <main role="main" class="container">
         <div class="row">
