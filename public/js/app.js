@@ -65803,6 +65803,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -66144,33 +66145,45 @@ var render = function() {
     "div",
     { staticClass: "card mt-3", attrs: { id: "comment-" + _vm.id } },
     [
-      _c("div", { staticClass: "card-header d-flex" }, [
-        _c("h5", { staticClass: "flex" }, [
-          _c("a", {
-            attrs: { href: "/profiles/" + _vm.comment.user.name },
-            domProps: { textContent: _vm._s(_vm.comment.user.name) }
+      _c(
+        "div",
+        { staticClass: "card-header d-flex" },
+        [
+          _c("avatar", {
+            attrs: {
+              username: _vm.comment.user.name,
+              avatar_path: _vm.comment.user.avatar_path
+            }
           }),
-          _vm._v(" said "),
-          _c("span", { domProps: { textContent: _vm._s(_vm.ago) } })
-        ]),
-        _vm._v(" "),
-        _vm.signedIn
-          ? _c(
-              "div",
-              { staticClass: "ml-auto" },
-              [
-                _c("like-button", {
-                  attrs: {
-                    path: _vm.comment.path,
-                    "likes-count": _vm.comment.likes_count,
-                    "is-liked": _vm.comment.isLiked
-                  }
-                })
-              ],
-              1
-            )
-          : _vm._e()
-      ]),
+          _vm._v(" "),
+          _c("h5", { staticClass: "flex ml-3" }, [
+            _c("a", {
+              attrs: { href: "/profiles/" + _vm.comment.user.name },
+              domProps: { textContent: _vm._s(_vm.comment.user.name) }
+            }),
+            _vm._v(" said "),
+            _c("span", { domProps: { textContent: _vm._s(_vm.ago) } })
+          ]),
+          _vm._v(" "),
+          _vm.signedIn
+            ? _c(
+                "div",
+                { staticClass: "ml-auto" },
+                [
+                  _c("like-button", {
+                    attrs: {
+                      path: _vm.comment.path,
+                      "likes-count": _vm.comment.likes_count,
+                      "is-liked": _vm.comment.isLiked
+                    }
+                  })
+                ],
+                1
+              )
+            : _vm._e()
+        ],
+        1
+      ),
       _vm._v(" "),
       _c("div", { staticClass: "card-body" }, [
         _vm.editing

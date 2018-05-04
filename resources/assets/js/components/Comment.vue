@@ -1,9 +1,10 @@
 <template>
     <div :id="'comment-'+id" class="card mt-3">
         <div class="card-header d-flex">
+            <avatar :username="comment.user.name"
+                    :avatar_path="comment.user.avatar_path"></avatar>
 
-
-            <h5 class="flex">
+            <h5 class="flex ml-3">
                 <a :href="'/profiles/'+comment.user.name" v-text="comment.user.name">
                 </a> said <span v-text="ago"></span>
             </h5>
