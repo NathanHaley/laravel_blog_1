@@ -56,7 +56,7 @@
                 <br>
                 @if($post->banner_path != null)
                     <div>
-                        <img src="/{{ $post->banner_path }}" class="rounded">
+                        <img src="{{ $post->banner_path }}" class="rounded">
                     </div>
                 @endif
                 <div class="mt-4">

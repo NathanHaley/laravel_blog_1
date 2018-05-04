@@ -53,18 +53,18 @@ class PostController extends Controller
         $this->authorize('create', Post::class);
         $validData = $request->validate(Post::validations());
 
-        $banner_image = null;
-        $card_image = null;
+        $banner_path = null;
+        $card_path = null;
 
-        if ($request->hasFile('banner_image')) {
+        if ($request->hasFile('banner_path')) {
 
-            $banner_image = request()->file('banner_image')->store('posts/images', 'public');
+            $banner_path = request()->file('banner_path')->store('posts/images', 'public');
 
         }
 
-        if ($request->hasFile('card_image')) {
+        if ($request->hasFile('card_path')) {
 
-            $card_image = request()->file('card_image')->store('posts/images', 'public');
+            $card_path = request()->file('card_path')->store('posts/images', 'public');
 
         }
 
@@ -72,8 +72,8 @@ class PostController extends Controller
         Post::create([
             'user_id' => auth()->id(),
             'channel_id' => $validData['channel_id'],
-            'banner_path' => $banner_image,
-            'card_path' => $card_image,
+            'banner_path' => $banner_path,
+            'card_path' => $card_path,
             'title' => $validData['title'],
             'lede' => $validData['lede'],
             'body' => $validData['body'],

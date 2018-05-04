@@ -26,14 +26,14 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="banner_image">Banner Image</label>
-                        <input name="banner_image" type="file" class="form-control" id="banner_image">
-                        <small id="banner_imageHelp" class="form-text text-muted"></small>
+                        <label for="banner_path">Banner Image</label>
+                        <input name="banner_path" type="file" class="form-control" id="banner_path">
+                        <small id="banner_pathHelp" class="form-text text-muted"></small>
                     </div>
                     <div class="form-group">
-                        <label for="card_image">Card Image</label>
-                        <input name="card_image" type="file" class="form-control" id="card_image">
-                        <small id="card_imageHelp" class="form-text text-muted"></small>
+                        <label for="card_path">Card Image</label>
+                        <input name="card_path" type="file" class="form-control" id="card_path">
+                        <small id="card_pathHelp" class="form-text text-muted"></small>
                     </div>
 
                     <div class="form-group">

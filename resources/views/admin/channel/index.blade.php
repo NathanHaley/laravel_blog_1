@@ -33,6 +33,7 @@
                                 color: {{ (hexdec($channel->color) > (hexdec('#ffffff')/2)) ? 'black':'white' }};">
                             &nbsp;
                         </div>
+                        {{ $channel->color }}
                     </td>
                     <td><a href="{{ route('admin.channel.edit', $channel->slug) }}">{{ $channel->name }}</a></td>
                     <td>{{$channel->description}}</td>

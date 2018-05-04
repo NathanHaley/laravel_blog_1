@@ -102,8 +102,8 @@ class Post extends Model
                 $id === null ? '' : Rule::unique('posts')->ignore($id),
                 'max:100',
             ],
-            'banner_image' => 'image|max:10000',
-            'card_image' => 'image|max:5000',
+            'banner_path' => 'image|max:5000',
+            'card_path' => 'image|max:1000',
             'lede' => 'required|max:250',
             'body' => 'required|max:65000',
             'channel_id' => 'required|exists:channels,id'
@@ -122,6 +122,16 @@ class Post extends Model
     public function path()
     {
         return "/post/{$this->slug}";
+    }
+
+    public function getBannerPathAttribute($banner_path)
+    {
+        return ($banner_path) ?  '/storage/'.$banner_path : null;
+    }
+
+    public function getCardPathAttribute($cardPath)
+    {
+        return ($cardPath) ?  '/storage/'.$cardPath : null;
     }
 
     public function getBodyAttribute($body)
