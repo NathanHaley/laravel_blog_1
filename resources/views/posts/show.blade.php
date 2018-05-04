@@ -2,6 +2,7 @@
 
 @section('header')
     <link href="{{ asset('css/vendor/trix.css') }}" rel="stylesheet">
+    @include('posts._post-styles')
 @endsection
 
 @section('content')
@@ -55,12 +56,10 @@
                 </div>
                 <br>
                 @if($post->banner_path != null)
-                    <div>
-                        <img src="{{ $post->banner_path }}" class="rounded">
+                    <div class="rounded w-100 h-250 post_banner">
                     </div>
                 @endif
                 <div class="mt-4">
-                    {{--<p>{{ $post->lede }}</p>--}}
                     <div class="trix-content">{!! $post->body !!}</div>
                 </div>
 

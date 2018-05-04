@@ -6,13 +6,16 @@
                 <div class="card-body d-flex flex-column align-items-start">
                     <strong class="d-inline-block mb-2" style="color: {{ $card->channel->color }}">{{ $card->channel->name }}</strong>
                     <h3 class="mb-0">
-                        <a class="text-dark" href="{{ route('post.show', $card) }}">Featured post</a>
+                        <a class="text-dark" href="{{ route('post.show', $card) }}">{{ str_limit($card->title, 17, '...')}}</a>
                     </h3>
-                    <div class="mb-1 text-muted">{{ $card->created_at->format('M Y') }}</div>
-                    <p class="card-text mb-auto">{{ $card->lede }}</p>
+                    <div class="mb-1 text-muted">{{ $card->created_at->format('M d') }}</div>
+                    <p class="card-text mb-auto">{{ str_limit($card->lede, 65, '...')}}</p>
                     <a href="{{ route('post.show', $card) }}">Continue reading</a>
                 </div>
-                <img class="card-img-right flex-auto d-none d-lg-block" width="200" height="250" src="{{ $card->card_path }}"
+                <img class="card-img-right flex-auto d-none d-lg-block"
+                     width="200"
+                     height="250"
+                     src="{{ $card->card_path }}"
                      alt="{{ $card->slug }}">
             </div>
         </div>

@@ -1,5 +1,9 @@
 @extends('layouts.blog')
 
+@section('header')
+    @include('posts._post-styles')
+@endsection
+
 @section('content')
     <h1>Edit Post</h1>
     <hr>
@@ -21,14 +25,33 @@
 
         <div class="form-group">
             <label for="banner_path">Banner Image</label>
-            <input name="banner_path" type="file" class="form-control" id="banner_path" value="{{ old('banner_path') ?? $post->banner_path }}">
-            <small id="banner_pathHelp" class="form-text text-muted"></small>
+            <input name="banner_path"
+                   type="file"
+                   class="form-control"
+                   id="banner_path"
+                   value="{{ old('banner_path') ?? $post->banner_path }}"
+                   placeholder="Upload a new image?">
+            <small id="banner_pathHelp" class="form-text text-muted">Leave blank, don't Browse, to keep the same image.</small>
         </div>
+
+        @if($post->banner_path != null)
+            <div class="rounded w-100 h-250 post_banner"></div>
+        @endif
+
         <div class="form-group">
             <label for="card_path">Card Image</label>
-            <input name="card_path" type="file" class="form-control" id="card_path" value="{{ old('card_path') ?? $post->card_path }}">
-            <small id="card_pathHelp" class="form-text text-muted"></small>
+            <input name="card_path"
+                   type="file"
+                   class="form-control"
+                   id="card_path"
+                   value="{{ old('card_path') ?? $post->card_path }}"
+                   placeholder="Upload a new image?">
+            <small id="card_pathHelp" class="form-text text-muted">Leave blank, don't Browse, to keep the same image.</small>
         </div>
+
+        @if($post->card_path != null)
+            <div class="rounded post_card"></div>
+        @endif
 
         <div class="form-group">
             <label for="title">Title</label>
@@ -48,8 +71,8 @@
             <label for="body">Body</label>
             <wysiwyg id="body" name="body" value="{{ old('body') ?? $post->body }}"></wysiwyg>
             {{--<textarea name="body" class="form-control" id="body" rows="8"--}}
-                      {{--placeholder="What do you have to say?"--}}
-                      {{--required>{{ old('body') ?? $post->body }}</textarea>--}}
+            {{--placeholder="What do you have to say?"--}}
+            {{--required>{{ old('body') ?? $post->body }}</textarea>--}}
         </div>
         <div class="form-group">
             <button type="submit" class="btn btn-primary">Update Post</button>
