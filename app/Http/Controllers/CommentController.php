@@ -21,7 +21,7 @@ class CommentController extends Controller
      */
     public function index(Post $post)
     {
-        return  $post->comments()->paginate(3);
+        return  $post->comments()->paginate(25);
     }
 
     /**
