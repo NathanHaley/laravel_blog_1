@@ -5,7 +5,8 @@
                     :avatar_path="comment.user.avatar_path"></avatar>
 
             <h5 class="flex ml-3">
-                <a :href="'/profiles/'+comment.user.name" v-text="comment.user.name">
+                <a :href="'/profiles/'+comment.user.name"
+                   v-text="comment.user.name">
                 </a> said <span v-text="ago"></span>
             </h5>
             <div v-if="signedIn" class="ml-auto">
@@ -30,7 +31,7 @@
             </div>
             <div v-else v-html="body" class="trix-content"></div>
         </div>
-        <div class="card-footer level" v-if="comment.user.id == this.user.id">
+        <div class="card-footer level" v-if="this.user != null && comment.user.id == this.user.id">
             <button class="btn btn-sm btn-primary mr-1" @click="editing = true">Edit</button>
             <button class="btn btn-sm btn-danger mr-1" @click="destroy">Delete</button>
         </div>

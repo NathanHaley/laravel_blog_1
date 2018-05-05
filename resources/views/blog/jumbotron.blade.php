@@ -7,8 +7,9 @@
                     rgba(0, 0, 0, .2),
                     rgba(0, 0, 0, 0),
                     rgba(0, 0, 0, 0)),
-            url({{ $banner->banner_path }});;
+            url({{ $banner->banner_path }});
             background-size: cover;
+            background-repeat: no-repeat;
             text-shadow: 2px 2px #000;
         }
     </style>

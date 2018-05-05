@@ -56,8 +56,7 @@
                 </div>
                 <br>
                 @if($post->banner_path != null)
-                    <div class="rounded w-100 h-250 post_banner">
-                    </div>
+                    <div class="rounded h-250 post_banner"></div>
                 @endif
                 <div class="mt-4">
                     <div class="trix-content">{!! $post->body !!}</div>
@@ -67,9 +66,9 @@
             <br>
             <br>
             <div class="col-md-10">
-                @auth
-                    <comments @added="commentsCount++" @removed="commentsCount--"></comments>
-                @endauth
+
+                <comments @added="commentsCount++" @removed="commentsCount--"></comments>
+
             </div>
         </div>
     </post-show>

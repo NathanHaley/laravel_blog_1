@@ -65804,6 +65804,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -66234,7 +66235,7 @@ var render = function() {
             })
       ]),
       _vm._v(" "),
-      _vm.comment.user.id == this.user.id
+      this.user != null && _vm.comment.user.id == this.user.id
         ? _c("div", { staticClass: "card-footer level" }, [
             _c(
               "button",
