@@ -24,7 +24,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $posts = Post::where(['featured_banner' => false, 'featured_card' => false, 'locked' => false])->orderby('created_at', 'desc')->paginate(4);
+        $posts = Post::where(['featured_banner' => false, 'featured_card' => false, 'locked' => false])->orderby('created_at', 'desc')->paginate(25);
         $banner = Post::where(['featured_banner' => true, 'locked' => false])->first();
         $cards = Post::where(['featured_card' => true, 'locked' => false])->orderby('created_at')->paginate(2);
 
