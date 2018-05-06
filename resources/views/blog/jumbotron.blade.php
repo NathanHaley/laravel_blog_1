@@ -19,7 +19,6 @@
             top: -0.9em;
             right: -0.8em;
             border: 1px solid white;
-
         }
 
         .featured-card {
