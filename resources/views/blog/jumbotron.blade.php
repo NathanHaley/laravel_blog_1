@@ -18,7 +18,7 @@
             position: absolute;
             top: -0.9em;
             right: -0.8em;
-            border: 1px solid white;
+            border: 5px solid white;
         }
 
         .featured-card {
@@ -29,7 +29,7 @@
             position: absolute;
             top: -0.3em;
             right: 0.3em;
-            border: 1px solid white;
+            border: 3px solid white;
             z-index: 2;
         }
     </style>
