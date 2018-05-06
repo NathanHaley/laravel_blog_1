@@ -37,7 +37,7 @@
                     <button class="btn btn-sm btn-link"
                             @click="cancelWysiwyg"
                             type="button">Cancel</button>
-                    
+
                 </form>
             </div>
             <div v-else v-html="form.body" class="trix-content"></div>

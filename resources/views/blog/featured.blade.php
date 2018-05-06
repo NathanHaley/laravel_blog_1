@@ -1,12 +1,15 @@
 <div class="row mb-2">
     @foreach($cards as $card)
-
-        <div class="col-md-6">
+        <div class="col-md-6 featured-card">
+            <avatar classes="featured-card-avatar" username="{{ $card->user->name }}"
+                    avatar_path="{{ $card->user->avatar_path }}" width="3"></avatar>
             <div class="card flex-md-row mb-4 box-shadow h-md-250">
                 <div class="card-body d-flex flex-column align-items-start">
-                    <strong class="d-inline-block mb-2" style="color: {{ $card->channel->color }}">{{ $card->channel->name }}</strong>
+                    <strong class="d-inline-block mb-2"
+                            style="color: {{ $card->channel->color }}">{{ $card->channel->name }}</strong>
                     <h3 class="mb-0">
-                        <a class="text-dark" href="{{ route('post.show', $card) }}">{{ str_limit($card->title, 17, '...')}}</a>
+                        <a class="text-dark"
+                           href="{{ route('post.show', $card) }}">{{ str_limit($card->title, 17, '...')}}</a>
                     </h3>
                     <div class="mb-1 text-muted">{{ $card->created_at->format('M d') }}</div>
                     <p class="card-text mb-auto">{{ str_limit($card->lede, 65, '...')}}</p>

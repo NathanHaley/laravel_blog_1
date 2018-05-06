@@ -6,7 +6,7 @@
                      :alt="name"
                      :id="id"
                      :name="name + '_avatar'"
-                     class="relative rounded-circle"
+                     :class="classes + ' relative rounded-circle'"
                      :style="'width: ' + size + 'em;'">
             </a>
         </span>
@@ -15,7 +15,7 @@
                  :alt="name"
                  :id="id"
                  :name="name + '_avatar'"
-                 class="relative rounded-circle"
+                 :class="classes + ' relative rounded-circle'"
                  :style="'width: ' + size + 'em;'">
         </span>
     </span>
@@ -32,6 +32,7 @@
             width: {
                 default: 2,
             },
+            classes: {},
             withLink: {
                 default: 'yes'
             },
@@ -49,7 +50,8 @@
         computed: {
             avatar_file() {
                 return this.avatar_path;
-            }
+            },
+
         },
     }
 </script>
