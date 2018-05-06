@@ -64334,7 +64334,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -64379,6 +64379,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         width: {
             default: 2
         },
+        classes: {},
         withLink: {
             default: 'yes'
         }
@@ -64414,7 +64415,7 @@ var render = function() {
       ? _c("span", [
           _c("a", { attrs: { href: "/profiles/" + _vm.name } }, [
             _c("img", {
-              staticClass: "relative rounded-circle",
+              class: _vm.classes + " relative rounded-circle",
               style: "width: " + _vm.size + "em;",
               attrs: {
                 src: _vm.avatar_file,
@@ -64427,7 +64428,7 @@ var render = function() {
         ])
       : _c("span", [
           _c("img", {
-            staticClass: "relative rounded-circle",
+            class: _vm.classes + " relative rounded-circle",
             style: "width: " + _vm.size + "em;",
             attrs: {
               src: _vm.avatar_file,
