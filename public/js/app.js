@@ -30876,8 +30876,11 @@ var app = new Vue({
 
 /***/ }),
 /* 144 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__forms_Form__ = __webpack_require__(241);
 
 window._ = __webpack_require__(145);
 window.Popper = __webpack_require__(8).default;
@@ -30946,6 +30949,10 @@ window.flash = function (message) {
 
   window.events.$emit('flash', { message: message, level: level });
 };
+
+
+
+window.Form = __WEBPACK_IMPORTED_MODULE_0__forms_Form__["a" /* default */];
 
 /***/ }),
 /* 145 */
@@ -65805,6 +65812,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -65819,7 +65837,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             editing: false,
             id: this.comment.id,
             body: this.comment.body,
-            path: this.comment.path
+            path: this.comment.path,
+            form: new Form({ body: this.comment.body })
         };
     },
 
@@ -65837,26 +65856,43 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
 
     methods: {
+        onSubmit: function onSubmit() {
+            var _this = this;
+
+            this.form.post('/comments').then(function (status) {
+                return _this.$emit('completed', status);
+            });
+        },
         cancelWysiwyg: function cancelWysiwyg() {
-            this.body = this.comment.body;
+            this.form.body = this.comment.body;
             this.editing = false;
         },
         update: function update() {
-            var _this = this;
+            var _this2 = this;
 
-            axios.patch('/comment/' + this.id, {
-                body: this.body
-            }).catch(function (error) {
-                flash(error.response.data, 'danger');
-            }).then(function (_ref) {
+            var newValue = this.form.body;
+            this.form.patch('/comment/' + this.id).then(function (_ref) {
                 var data = _ref.data;
 
-
-                _this.comment.body = _this.body;
-                _this.editing = false;
+                _this2.comment.body = newValue;
+                _this2.editing = false;
 
                 flash('Updated!');
             });
+
+            // axios.patch(
+            //     '/comment/' + this.id, {
+            //         body: this.body
+            //     })
+            //     .catch(error => {
+            //         flash(error.response.data, 'danger');
+            //     }).then(({data}) => {
+            //
+            //     this.comment.body = this.body;
+            //     this.editing = false;
+            //
+            //     flash('Updated!');
+            // });
         },
         destroy: function destroy() {
             axios.delete('/comment/' + this.id);
@@ -66189,49 +66225,73 @@ var render = function() {
       _c("div", { staticClass: "card-body" }, [
         _vm.editing
           ? _c("div", [
-              _c("form", [
-                _c(
-                  "div",
-                  { staticClass: "form-group" },
-                  [
-                    _c("wysiwyg", {
-                      attrs: { id: _vm.wysiwygId, name: _vm.wysiwygId },
-                      model: {
-                        value: _vm.body,
-                        callback: function($$v) {
-                          _vm.body = $$v
-                        },
-                        expression: "body"
-                      }
-                    })
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-sm btn-primary",
-                    attrs: { type: "button" },
-                    on: { click: _vm.update }
-                  },
-                  [_vm._v("Update")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-sm btn-link",
-                    attrs: { type: "button" },
-                    on: { click: _vm.cancelWysiwyg }
-                  },
-                  [_vm._v("Cancel")]
-                )
-              ])
+              _c(
+                "form",
+                {
+                  on: {
+                    submit: function($event) {
+                      $event.preventDefault()
+                      return _vm.update($event)
+                    },
+                    keydown: function($event) {
+                      _vm.form.errors.clear()
+                    }
+                  }
+                },
+                [
+                  _c(
+                    "div",
+                    { staticClass: "form-group" },
+                    [
+                      _c("wysiwyg", {
+                        attrs: { id: _vm.wysiwygId, name: _vm.wysiwygId },
+                        model: {
+                          value: _vm.form.body,
+                          callback: function($$v) {
+                            _vm.$set(_vm.form, "body", $$v)
+                          },
+                          expression: "form.body"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _vm.form.errors.has("body")
+                        ? _c("small", {
+                            staticClass:
+                              "text-danger border border-danger p-1 rounded",
+                            attrs: { id: _vm.wysiwygId + "Errors" },
+                            domProps: {
+                              textContent: _vm._s(_vm.form.errors.get("body"))
+                            }
+                          })
+                        : _vm._e()
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-sm btn-primary",
+                      attrs: { type: "submit", disabled: _vm.form.errors.any() }
+                    },
+                    [_vm._v("Update")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-sm btn-link",
+                      attrs: { type: "button" },
+                      on: { click: _vm.cancelWysiwyg }
+                    },
+                    [_vm._v("Cancel")]
+                  )
+                ]
+              )
             ])
           : _c("div", {
               staticClass: "trix-content",
-              domProps: { innerHTML: _vm._s(_vm.body) }
+              domProps: { innerHTML: _vm._s(_vm.form.body) }
             })
       ]),
       _vm._v(" "),
@@ -66359,7 +66419,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -66394,6 +66454,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -66401,7 +66467,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     data: function data() {
         return {
-            body: ''
+            body: '',
+            form: new Form({ body: '' })
         };
     },
 
@@ -66419,11 +66486,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         addComment: function addComment() {
             var _this = this;
 
-            axios.post(location.pathname + '/comment', { body: this.body }).catch(function (error) {
-                flash(error.response.data, 'danger');
-            }).then(function (_ref) {
+            this.form.post(location.pathname + '/comment').then(function (_ref) {
                 var data = _ref.data;
-
 
                 _this.element.reset();
 
@@ -66431,6 +66495,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
                 _this.$emit('created', data);
             });
+
+            // axios.post(location.pathname + '/comment', {body: this.body})
+            //     .catch(error => {
+            //         flash(error.response.data, 'danger');
+            //     })
+            //     .then(({data}) => {
+            //
+            //         this.element.reset();
+            //
+            //         flash('Your comment has been added.');
+            //
+            //         this.$emit('created', data);
+            //     });
         }
     }
 });
@@ -66447,38 +66524,64 @@ var render = function() {
     _vm.signedIn
       ? _c("div", [
           _c(
-            "div",
-            { staticClass: "form-group mt-3" },
-            [
-              _c("wysiwyg", {
-                attrs: {
-                  placeholder: "Add a comment?",
-                  id: _vm.wysiwygId,
-                  name: _vm.wysiwygId
+            "form",
+            {
+              on: {
+                submit: function($event) {
+                  $event.preventDefault()
+                  return _vm.addComment($event)
                 },
-                model: {
-                  value: _vm.body,
-                  callback: function($$v) {
-                    _vm.body = $$v
-                  },
-                  expression: "body"
+                keydown: function($event) {
+                  _vm.form.errors.clear()
                 }
-              })
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c("div", { staticClass: "form-group" }, [
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-sm btn-primary",
-                attrs: { type: "button" },
-                on: { click: _vm.addComment }
-              },
-              [_vm._v("Comment\n                ")]
-            )
-          ])
+              }
+            },
+            [
+              _c(
+                "div",
+                { staticClass: "form-group mt-3" },
+                [
+                  _c("wysiwyg", {
+                    attrs: {
+                      placeholder: "Add a comment?",
+                      id: _vm.wysiwygId,
+                      name: _vm.wysiwygId
+                    },
+                    model: {
+                      value: _vm.form.body,
+                      callback: function($$v) {
+                        _vm.$set(_vm.form, "body", $$v)
+                      },
+                      expression: "form.body"
+                    }
+                  }),
+                  _vm._v(" "),
+                  _vm.form.errors.has("body")
+                    ? _c("small", {
+                        staticClass:
+                          "text-danger border border-danger p-1 rounded",
+                        attrs: { id: _vm.wysiwygId + "Errors" },
+                        domProps: {
+                          textContent: _vm._s(_vm.form.errors.get("body"))
+                        }
+                      })
+                    : _vm._e()
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-sm btn-primary",
+                    attrs: { type: "submit", disabled: _vm.form.errors.any() }
+                  },
+                  [_vm._v("Comment\n                ")]
+                )
+              ])
+            ]
+          )
         ])
       : _c("div", [_vm._m(0)])
   ])
@@ -66862,6 +66965,294 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 232 */,
+/* 233 */,
+/* 234 */,
+/* 235 */,
+/* 236 */,
+/* 237 */,
+/* 238 */,
+/* 239 */,
+/* 240 */,
+/* 241 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Errors__ = __webpack_require__(242);
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+
+
+var Form = function () {
+    /**
+     * Create a new Form instance.
+     *
+     * @param {object} data
+     */
+    function Form(data) {
+        _classCallCheck(this, Form);
+
+        this.originalData = data;
+
+        for (var field in data) {
+            this[field] = data[field];
+        }
+
+        this.errors = new __WEBPACK_IMPORTED_MODULE_0__Errors__["a" /* default */]();
+    }
+
+    /**
+     * Fetch all relevant data for the form.
+     */
+
+
+    _createClass(Form, [{
+        key: 'data',
+        value: function data() {
+            var data = {};
+
+            for (var property in this.originalData) {
+                data[property] = this[property];
+            }
+
+            return data;
+        }
+
+        /**
+         * Reset the form fields.
+         */
+
+    }, {
+        key: 'reset',
+        value: function reset() {
+            for (var field in this.originalData) {
+                this[field] = '';
+            }
+
+            this.errors.clear();
+        }
+
+        /**
+         * Send a POST request to the given URL.
+         * .
+         * @param {string} url
+         */
+
+    }, {
+        key: 'post',
+        value: function post(url) {
+            return this.submit('post', url);
+        }
+
+        /**
+         * Send a PUT request to the given URL.
+         * .
+         * @param {string} url
+         */
+
+    }, {
+        key: 'put',
+        value: function put(url) {
+            return this.submit('put', url);
+        }
+
+        /**
+         * Send a PATCH request to the given URL.
+         * .
+         * @param {string} url
+         */
+
+    }, {
+        key: 'patch',
+        value: function patch(url) {
+            return this.submit('patch', url, false);
+        }
+
+        /**
+         * Send a DELETE request to the given URL.
+         * .
+         * @param {string} url
+         */
+
+    }, {
+        key: 'delete',
+        value: function _delete(url) {
+            return this.submit('delete', url);
+        }
+
+        /**
+         * Submit the form.
+         *
+         * @param {string} requestType
+         * @param {string} url
+         */
+
+    }, {
+        key: 'submit',
+        value: function submit(requestType, url) {
+            var _this = this;
+
+            var resetForm = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
+
+            return new Promise(function (resolve, reject) {
+                axios[requestType](url, _this.data()).then(function (response) {
+
+                    _this.onSuccess(response.data, resetForm);
+
+                    resolve(response.data);
+                }).catch(function (error) {
+                    _this.onFail(error.response.data['errors']);
+
+                    reject(error.response.data);
+                });
+            });
+        }
+
+        /**
+         * Handle a successful form submission.
+         *
+         * @param {object} data
+         */
+
+    }, {
+        key: 'onSuccess',
+        value: function onSuccess(data) {
+            var resetForm = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+
+            resetForm ? this.reset() : null;
+        }
+
+        /**
+         * Handle a failed form submission.
+         *
+         * @param {object} errors
+         */
+
+    }, {
+        key: 'onFail',
+        value: function onFail(errors) {
+            this.errors.record(errors);
+        }
+    }]);
+
+    return Form;
+}();
+
+/* harmony default export */ __webpack_exports__["a"] = (Form);
+
+// new Vue({
+//     el: '#app',
+//
+//     data: {
+//         form: new Form({
+//             name: '',
+//             description: ''
+//         })
+//     },
+//
+//     methods: {
+//         onSubmit() {
+//             this.form.post('/projects')
+//                 .then(response => alert('Wahoo!'));
+//         }
+//     }
+// });
+
+/***/ }),
+/* 242 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Errors = function () {
+    /**
+     * Create a new Errors instance.
+     */
+    function Errors() {
+        _classCallCheck(this, Errors);
+
+        this.errors = {};
+    }
+
+    /**
+     * Determine if an errors exists for the given field.
+     *
+     * @param {string} field
+     */
+
+
+    _createClass(Errors, [{
+        key: "has",
+        value: function has(field) {
+            return this.errors.hasOwnProperty(field);
+        }
+
+        /**
+         * Determine if we have any errors.
+         */
+
+    }, {
+        key: "any",
+        value: function any() {
+            return Object.keys(this.errors).length > 0;
+        }
+
+        /**
+         * Retrieve the error message for a field.
+         *
+         * @param {string} field
+         */
+
+    }, {
+        key: "get",
+        value: function get(field) {
+            if (this.errors[field]) {
+                return this.errors[field][0];
+            }
+        }
+
+        /**
+         * Record the new errors.
+         *
+         * @param {object} errors
+         */
+
+    }, {
+        key: "record",
+        value: function record(errors) {
+            this.errors = errors;
+        }
+
+        /**
+         * Clear one or all error fields.
+         *
+         * @param {string|null} field
+         */
+
+    }, {
+        key: "clear",
+        value: function clear(field) {
+            if (field) {
+                delete this.errors[field];
+
+                return;
+            }
+
+            this.errors = {};
+        }
+    }]);
+
+    return Errors;
+}();
+
+/* harmony default export */ __webpack_exports__["a"] = (Errors);
 
 /***/ })
 /******/ ]);
