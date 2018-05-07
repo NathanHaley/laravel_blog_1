@@ -13,9 +13,8 @@ class PostController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth')->except(['index', 'show', '']);
+        $this->middleware('auth')->except(['index', 'show', 'channel']);
     }
-
 
     /**
      * Display a listing of the resource.
@@ -27,6 +26,18 @@ class PostController extends Controller
         $posts = $user->posts;
 
         return view('posts.index', compact('posts', 'user'));
+    }
+
+    /**
+     * Display a listing of posts for a channel.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function channel(Channel $channel)
+    {
+        $posts = $channel->posts;
+
+        return view('posts.channel', compact('posts', 'channel'));
     }
 
     /**

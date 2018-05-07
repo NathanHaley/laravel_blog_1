@@ -39,6 +39,8 @@ Route::get('post/{post}/show', 'PostController@show')->name('post.show');
 Route::post('post/{post}/like', 'PostController@like');
 Route::delete('post/{post}/like', 'PostController@unlike');
 
+Route::get('post/{channel}', 'PostController@channel')->name('channel.posts');
+
 Route::get('post/{post}/show/comment', 'CommentController@index')->name('comment.list');
 Route::post('post/{post}/show/comment', 'CommentController@store')->middleware('must-be-confirmed')->name('comment.create');
 Route::patch('comment/{comment}', 'CommentController@update')->name('comment.update');
@@ -58,13 +60,6 @@ Route::delete('/profiles/{user}/notifications/{notification}', 'UserNotification
 
 Route::post('/profiles/{user}/like', 'ProfileController@like');
 Route::delete('/profiles/{user}/like', 'ProfileController@unlike');
-
-//Route::post('/like/{likeable}', 'LikableController@store');
-//Route::delete('/like/{likeable}', 'LikableController@destroy');
-
-//    Route::post('api/users/{user}/avatar', function () {
-//        return response([], 204);
-//    });
 Route::post('api/users/{user}/avatar', 'Api\UserAvatarController@store')->name('avatar');
 
 /**

@@ -8,7 +8,6 @@ use Illuminate\Http\Request;
 
 class ChannelController extends Controller
 {
-
     /**
      * Display a listing of the resource.
      *
@@ -22,6 +21,11 @@ class ChannelController extends Controller
         $channels = Channel::withTrashed()->get();
 
         return view('admin.channel.index', compact('channels'));
+    }
+
+    public function activeList()
+    {
+        return  Channel::get()->orderBy('name');
     }
 
     /**

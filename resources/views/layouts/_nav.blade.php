@@ -17,6 +17,12 @@
                 </ul>
             @endauth
 
+            <ul class="navbar-nav">
+                @foreach($channels as $channel)
+                    <li><a class="nav-link" style="color: {{ $channel->color }}" href="{{ route('channel.posts', $channel) }}">{{ $channel->name }}</a></li>
+                @endforeach
+            </ul>
+
             @can('view', auth()->user(), \App\Channel::class)
                 <ul class="navbar-nav">
                     <li class="nav-item dropdown">
@@ -31,21 +37,20 @@
                         </div>
                     </li>
                 </ul>
-            @endcan
+        @endcan
 
         <!-- Right Side Of Navbar -->
             <ul class="navbar-nav ml-auto">
                 <!-- Authentication Links -->
-                @guest
-                    {{--<li><a class="nav-item nav-link" href="{{ route('login') }}">{{ __('Login') }}</a></li>--}}
-                    {{--<li><a class="nav-item nav-link" href="{{ route('register') }}">{{ __('Register') }}</a></li>--}}
-                @else
+                @auth
                     <user-notifications></user-notifications>
 
                     <li class="nav-item dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                            <avatar with-link="no" id="nav_avatar" username="{{ auth()->user()->name }}" avatar_path="{{ auth()->user()->avatar_path }}" ></avatar> <span class="caret"></span>
+                            <avatar with-link="no" id="nav_avatar" username="{{ auth()->user()->name }}"
+                                    avatar_path="{{ auth()->user()->avatar_path }}"></avatar>
+                            <span class="caret"></span>
                         </a>
 
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -66,7 +71,7 @@
                             </form>
                         </div>
                     </li>
-                @endguest
+                @endauth
             </ul>
         </div>
     </div>
