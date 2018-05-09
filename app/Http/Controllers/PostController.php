@@ -111,9 +111,12 @@ class PostController extends Controller
      *
      * @param  \App\Post $post
      * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function edit(Post $post)
     {
+        $this->authorize('update', $post);
+
         $channels = Channel::all();
 
         return view('posts.edit', compact('post', 'channels'));
@@ -149,7 +152,7 @@ class PostController extends Controller
 
         $post->update($validData);
 
-        return redirect(route('user-posts', auth()->user()->name))->with('flash', [
+        return redirect(route('user-posts', $post->user->name))->with('flash', [
             'type' => 'success',
             'message' => 'Post updated.'
         ]);
@@ -160,9 +163,12 @@ class PostController extends Controller
      *
      * @param  \App\Post $post
      * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function delete(Post $post)
     {
+        $this->authorize('delete', $post);
+
         return view('posts.delete', compact('post'));
     }
 
@@ -170,16 +176,21 @@ class PostController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  \App\Post $post
-     * @return void
+     * @return \Illuminate\Http\RedirectResponse
      * @throws \Exception
      */
     public function destroy(Post $post)
     {
+        $this->authorize('delete', $post);
+
         $name = $post->user->name;
 
         $post->delete();
 
-        return redirect(route('profile', $name));
+        return redirect(route('user-posts', $name))->with('flash', [
+            'type' => 'danger',
+            'message' => 'Post deleted.'
+        ]);
     }
 
     public function like(Post $post)

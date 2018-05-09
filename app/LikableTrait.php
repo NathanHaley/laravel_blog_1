@@ -27,7 +27,8 @@ trait LikableTrait
 
     public function like()
     {
-        //Can simply use this since we defined a polymorphic relationship
+        if(! auth()->check()) return response('You must login.', 403);
+
         $attributes = [
             'user_id' => auth()->id(),
             'liked_id' => $this->id,
@@ -40,6 +41,8 @@ trait LikableTrait
 
     public function unlike()
     {
+        if(! auth()->check()) return response('You must login.', 403);
+
         $attributes = ['user_id' => auth()->id()];
 
         $this->likes()->where($attributes)->get()->each->delete();

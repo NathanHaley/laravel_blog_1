@@ -28,14 +28,36 @@ class PostTest extends TestCase
     }
 
 
-    public function authenticated_users_can_view_the_list_of_their_posts()
+    /** @test */
+    public function members_can_view_a_list_of_their_posts()
     {
         $this->signIn();
 
-        $post = create('post', ['user_id' => auth()->id()])->toArray();
+        $userId = auth()->id();
 
-        $this->get("/post/{auth()->name()}")
-            ->assertSee($post['title']);
+        $title = create('post', ['user_id' => $userId])->title;
+
+        $this->get(route('user-posts', auth()->user()))
+            ->assertSee($title);
+    }
+
+    /** @test */
+    public function guests_can_not_view_a_list_of_their_posts_for_edit()
+    {
+        $user = create('user');
+
+        $userId = $user->id;
+
+        $titles = [];
+        for ($i = 0; $i < 5; ++$i) {
+            $titles = array_prepend($titles, create('post', ['user_id' => $userId])->title);
+        }
+
+        $this->get(route('home'))
+            ->assertDontSee('My Posts');
+
+        $this->get(route('user-posts', $user))
+            ->assertDontSee('Edit');
     }
 
     /** @test */
@@ -55,7 +77,7 @@ class PostTest extends TestCase
     /** @test */
     public function authenticated_users_can_update_their_post()
     {
-        $this->signInAdmin();
+        $this->signIn();
 
         $post = create('post', ['user_id' => auth()->id()])->toArray();
 
@@ -73,5 +95,71 @@ class PostTest extends TestCase
 
     }
 
+    /** @test */
+    public function authenticated_users_can_delete_their_post()
+    {
+        $this->signIn()->withExceptionHandling();
+
+        $post = create('post', ['user_id' => auth()->id()])->toArray();
+
+        $this->delete("post/{$post['slug']}", $post)
+            ->assertRedirect(route('user-posts', auth()->user()))
+            ->assertDontSee($post['title']);
+    }
+
+    /** @test */
+    public function admins_can_delete_another_users_post()
+    {
+        $this->signInAdmin();
+
+        $user = create('user');
+        $post = create('post', ['user_id' => $user->id])->toArray();
+
+        $this->delete("post/{$post['slug']}", $post)
+            ->assertRedirect(route('user-posts', $user))
+            ->assertDontSee($post['title']);
+    }
+
+    /** @test */
+    public function admins_can_update_another_users_post()
+    {
+        $this->signInAdmin();
+
+        $user = create('user');
+        $post = create('post', ['user_id' => $user->id])->toArray();
+
+        $this->get("post/{$post['slug']}/edit")
+            ->assertSee('Edit Post')
+            ->assertSee($post['title']);
+
+        $post['title'] = 'Updated Title';
+
+        $this->patch("post/{$post['slug']}", $post)
+            ->assertRedirect(route('user-posts', $user));
+    }
+
+    /** @test */
+    public function authenticated_users_can_not_delete_another_users_post()
+    {
+        $this->signIn()->withExceptionHandling();
+
+        $post = create('post', ['user_id' => create('user')->id])->toArray();
+
+        $this->delete("post/{$post['slug']}", $post)
+            ->assertSee('Unauthorized');
+    }
+
+    /** @test */
+    public function guests_can_not_delete_a_post()
+    {
+        $this->signIn()->withExceptionHandling();
+
+        $post = create('post', ['user_id' => auth()->id()])->toArray();
+
+        $this->signOut();
+
+        $this->delete("post/{$post['slug']}", $post)
+            ->assertSee('login');
+    }
 
 }

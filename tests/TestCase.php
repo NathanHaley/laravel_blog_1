@@ -29,6 +29,13 @@ abstract class TestCase extends BaseTestCase
         return $this;
     }
 
+    protected function signOut()
+    {
+        \Auth::logout();
+
+        return $this;
+    }
+
     protected function signInAdmin($admin = null)
     {
         $this->signIn($admin);
