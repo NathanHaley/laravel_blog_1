@@ -26,7 +26,7 @@
         </style>
     @endsection
 
-    <div id="jumbotron-feature" class="jumbotron p-3 p-md-5 text-white rounded bg-dark">
+    <div id="jumbotron-feature" class="jumbotron p-3 p-md-5 text-white rounded bg-dark" >
         <avatar id="jumbotron-feature-avatar" username="{{ $banner->user->name }}"
                 avatar_path="{{ $banner->user->avatar_path }}" width="6"></avatar>
         <div class="col-md-6 px-0">

@@ -6,7 +6,8 @@ function classAliasConvert($class)
     $aliasList = [
         'user' => 'App\User',
         'post' => 'App\Post',
-        'channel' => 'App\Channel'
+        'channel' => 'App\Channel',
+        'comment' => 'App\Comment'
     ];
     return $aliasList[$class] ?? $class;
 }

@@ -136,6 +136,9 @@ class PostTest extends TestCase
 
         $this->patch("post/{$post['slug']}", $post)
             ->assertRedirect(route('user-posts', $user));
+
+        $this->get(route('user-posts', $user))
+            ->assertSee($post['title']);
     }
 
     /** @test */

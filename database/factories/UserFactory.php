@@ -98,3 +98,31 @@ $factory->define(App\Channel::class, function (Faker $faker) {
         'color' => '#'.dechex(rand(0x000000, 0xFFFFFF))
     ];
 });
+
+$factory->define(App\Comment::class, function (Faker $faker) {
+
+    return [
+        'user_id' => function () {
+            return factory(\App\User::class)->create()->id;
+        },
+        'post_id' => function () {
+            return factory(\App\Post::class)->create()->id;
+        },
+        'body'  => $faker->paragraph,
+    ];
+});
+
+$factory->state(App\Comment::class, 'from_existing_posts_and_users', function (Faker $faker) {
+
+    return [
+        'user_id' => function () {
+            return \App\User::all()->random()->id;
+        },
+        'post_id' => function () {
+            return \App\Post::all()->random()->id;
+        },
+        'body'  => $faker->paragraph,
+    ];
+});
+
+
