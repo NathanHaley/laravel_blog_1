@@ -17,3 +17,15 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
 }
 
+.featured-card {
+  position: relative;
+}
+
+.featured-card-avatar {
+  position: absolute;
+  top: -0.3em;
+  right: 0.3em;
+  border: 3px solid white;
+  z-index: 2;
+}
+

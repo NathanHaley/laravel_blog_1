@@ -1,5 +1,4 @@
 <div class="row mb-2">
-
     @forelse($cards as $card)
         <div class="col-md-6 featured-card">
             <avatar classes="featured-card-avatar" username="{{ $card->user->name }}"

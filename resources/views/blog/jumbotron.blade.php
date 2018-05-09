@@ -1,18 +1,4 @@
-@section('header')
-    <style type="text/css">
-        .featured-card {
-            position: relative;
-        }
 
-        .featured-card-avatar {
-            position: absolute;
-            top: -0.3em;
-            right: 0.3em;
-            border: 3px solid white;
-            z-index: 2;
-        }
-    </style>
-@endsection
 
 @if($banner)
     @section('header')

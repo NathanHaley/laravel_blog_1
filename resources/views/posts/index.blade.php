@@ -15,21 +15,6 @@
 
             @include('posts._card')
 
-            {{--<div class="card mt-5">--}}
-                {{--@auth--}}
-                    {{--<div class="card-header"></div>--}}
-                {{--@endauth--}}
-                {{--<div class="card-body">--}}
-                    {{--<h5 class="card-title">{{ $post->title }}</h5>--}}
-                    {{--<h6 class="card-subtitle mb-2 text-muted">{{ $post->created_at->format('n-d-Y') }}</h6>--}}
-                    {{--<p class="card-text">{{ $post->body }}</p>--}}
-                    {{--<a href="{{ route('post.show', $post) }}" class="card-link">Read more...</a>--}}
-                {{--</div>--}}
-                {{--@can('update')--}}
-                    {{--<div class="card-footer"></div>--}}
-                {{--@endcan--}}
-            {{--</div>--}}
-
         @endforeach
     </div>
 

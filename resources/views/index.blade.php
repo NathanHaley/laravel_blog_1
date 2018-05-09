@@ -1,6 +1,5 @@
 @extends('layouts.blog')
 
-
 @section('content')
 
     @include('blog.jumbotron')
