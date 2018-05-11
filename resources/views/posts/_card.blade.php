@@ -8,12 +8,13 @@
         @endif
         <h5 class="card-title d-flex post-card">
             <span>
-                    {{ $post->title }}
-                </span>
+                {{ $post->title }}
+            </span>
             <span class="ml-auto">
-                    <small class="text-muted">visits:</small> {{ $post->visits }}
-                </span>
+                <small class="text-muted">visits:</small> {{ $post->visits }}
+            </span>
         </h5>
+            <h5><a href="{{ route('channel.posts', $post->channel) }}" style="color: {{ $post->channel->color }}">{{ $post->channel->name }}</a></h5>
         <h6 class="card-subtitle mb-2 text-muted">{{ $post->created_at->format('n-d-Y') }}</h6>
         <p class="card-text">{{ $post->lede }}</p>
         <a href="{{ route('post.show', $post) }}" class="card-link">Read more...</a>

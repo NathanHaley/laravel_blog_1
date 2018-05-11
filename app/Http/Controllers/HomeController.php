@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -24,10 +25,21 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $posts = Post::where(['featured_banner' => false, 'featured_card' => false, 'locked' => false])->orderby('created_at', 'desc')->paginate(25);
+        $breakPoint = Post::breakPoint();
+
+        $posts = Post::where([
+            'featured_banner' => false,
+            'featured_card' => false,
+            'locked' => false
+        ])->where('created_at', '>=', $breakPoint)->orderby('created_at', 'desc')->paginate(25);
+
         $banner = Post::where(['featured_banner' => true, 'locked' => false])->first();
+
         $cards = Post::where(['featured_card' => true, 'locked' => false])->orderby('created_at')->paginate(2);
 
-        return view('index', compact('posts', 'banner', 'cards'));
+        $archives = Post::archives($breakPoint);
+
+
+        return view('index', compact('posts', 'banner', 'cards', 'archives'));
     }
 }

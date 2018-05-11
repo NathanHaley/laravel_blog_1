@@ -88,6 +88,33 @@ $factory->state(App\Post::class, 'from_existing_channels_and_users', function (F
     ];
 });
 
+$factory->state(/**
+ * @param Faker $faker
+ * @return array
+ */
+    App\Post::class, 'from_existing_channels_and_users_with_banner', function (Faker $faker) {
+    $title = $faker->unique()->sentence();
+    $date = $faker->dateTimeBetween('-2 years');
+
+    return [
+        'user_id' => function () {
+            return \App\User::all()->random()->id;
+        },
+        'channel_id' => function () {
+            return \App\Channel::all()->random()->id;
+        },
+        'title' => $title,
+        'slug' => str_slug($title),
+        'lede' => $faker->paragraph(),
+        'body'  => $faker->text(rand(400, 2000)),
+        'banner_path' => 'https://placeimg.com/1000/250/any/'.rand(1, 1000),
+        'visits' => $faker->numberBetween(0, 35),
+        'locked' => $faker->boolean(15),
+        'created_at' => $date,
+        'updated_at' => $date
+    ];
+});
+
 $factory->define(App\Channel::class, function (Faker $faker) {
     $name = $faker->unique()->sentence(3);
 

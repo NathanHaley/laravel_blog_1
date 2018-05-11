@@ -3,8 +3,10 @@
 namespace App;
 
 use App\Events\UserPublishedNewPost;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 
@@ -19,7 +21,7 @@ class Post extends Model
     protected $dates = [
         'created_at',
         'updated_at',
-    //    'deleted_at'
+        //    'deleted_at'
     ];
 
     protected static function boot()
@@ -119,6 +121,28 @@ class Post extends Model
         return $comment;
     }
 
+
+    static function breakPoint(int $monthsBack = 1) {
+        return Post::orderby('created_at', 'desc')->pluck('created_at')->first()->subMonths($monthsBack);
+    }
+
+
+    static function archives(Carbon $breakPoint = null)
+    {
+        $breakPoint = $breakPoint ?? Carbon::now()->subMonth();
+
+        return static::select(
+            DB::raw('year(created_at) as year, monthname(created_at) as monthName, month(created_at) as month')
+        )
+            ->where([
+                ['locked', '=', false],
+                ['created_at', '<', $breakPoint]
+            ])
+            ->groupby(['year', 'monthName', 'month'])
+            ->orderby('created_at', 'desc')
+            ->get();
+    }
+
     public function path()
     {
         return "/post/{$this->slug}";
@@ -126,12 +150,14 @@ class Post extends Model
 
     public function getBannerPathAttribute($banner_path)
     {
-        return ($banner_path) ?  '/storage/'.$banner_path : null;
+        if (isset($banner_path) && starts_with($banner_path, 'https://')) return $banner_path;
+
+        return ($banner_path) ? '/storage/' . $banner_path : null;
     }
 
     public function getCardPathAttribute($cardPath)
     {
-        return ($cardPath) ?  '/storage/'.$cardPath : null;
+        return ($cardPath) ? '/storage/' . $cardPath : null;
     }
 
     public function getBodyAttribute($body)

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Channel;
 use App\Post;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -13,7 +14,7 @@ class PostController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth')->except(['index', 'show', 'channel']);
+        $this->middleware('auth')->except(['index', 'show', 'channel', 'archives']);
     }
 
     /**
@@ -26,6 +27,17 @@ class PostController extends Controller
         $posts = $user->posts;
 
         return view('posts.index', compact('posts', 'user'));
+    }
+
+    public function archives(int $year, string $monthName)
+    {
+        $breakPoint = Post::breakPoint();
+
+        $archives = Post::archives($breakPoint);
+
+        $posts = Post::whereYear('created_at', $year)->whereMonth('created_at', Carbon::parse($monthName)->month)->orderby('created_at', 'desc')->get();
+
+        return view('posts.archives', compact('posts', 'archives', 'year', 'monthName'));
     }
 
     /**

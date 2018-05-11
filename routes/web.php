@@ -39,6 +39,14 @@ Route::get('post/{post}/show', 'PostController@show')->name('post.show');
 Route::post('post/{post}/like', 'PostController@like');
 Route::delete('post/{post}/like', 'PostController@unlike');
 
+Route::get('posts/archive/year/{year}/month/{month}', 'PostController@archives')
+    ->where('year', '20[1-9]{2}')
+    ->where('month','(January|February|March|April|May|June|July|August|September|October|November|December)' )
+    ->name('post.archives');
+
+
+///^\w*(January|February|March|April|May|June|July|August|September|October|November|December) \d{1,2}, \d{4}/igm
+
 Route::get('post/{channel}', 'PostController@channel')->name('channel.posts');
 
 Route::get('post/{post}/show/comment', 'CommentController@index')->name('comment.list');
