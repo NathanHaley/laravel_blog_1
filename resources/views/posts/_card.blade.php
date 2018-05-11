@@ -6,7 +6,7 @@
         @if(isset($show_avatar) && $show_avatar  === true)
             <avatar classes="post-card-avatar" username="{{ $post->user->name }}" avatar_path="{{ $post->user->avatar_path }}" width="4"></avatar>
         @endif
-        <h5 class="card-title d-flex post-card">
+        <h5 class="card-title d-flex pt-3">
             <span>
                 {{ $post->title }}
             </span>
