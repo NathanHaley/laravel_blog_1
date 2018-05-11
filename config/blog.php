@@ -2,6 +2,7 @@
 
 return [
     'administrators' => [
+        'nathan@nathandemo.com',
         'a@a.com'
     ],
     'permissions' => [
