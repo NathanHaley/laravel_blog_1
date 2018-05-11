@@ -139,7 +139,8 @@ class Post extends Model
                 ['created_at', '<', $breakPoint]
             ])
             ->groupby(['year', 'monthName', 'month'])
-            ->orderby('created_at', 'desc')
+            ->orderby('year', 'desc')
+            ->orderby('month', 'desc')
             ->get();
     }
 
