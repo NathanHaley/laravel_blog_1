@@ -27,7 +27,7 @@
                 return ['btn', this.userLiked ? 'btn-primary' : 'btn-outline-primary', this.addClasses];
             },
             endpoint() {
-                return this.path;// + '/like';
+                return this.path + '/like';
             }
         },
         methods: {

@@ -65068,7 +65068,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             return ['btn', this.userLiked ? 'btn-primary' : 'btn-outline-primary', this.addClasses];
         },
         endpoint: function endpoint() {
-            return this.path; // + '/like';
+            return this.path + '/like';
         }
     },
     methods: {
