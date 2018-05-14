@@ -58,7 +58,7 @@ Route::delete('post/{post}/comment/{comment}/like', 'CommentController@unlike');
 
 Route::get('profiles/{user}', 'ProfileController@show')->name('profile');
 Route::get('user/{user}/posts', 'PostController@index')->name('user-posts');
-Route::get('/api/users', 'Api\UserController@index');
+//Route::get('/api/users', 'Api\UserController@index');
 
 Route::post('follow/{user}', 'UserFollowController@store')->name('follow');
 Route::delete('follow/{user}', 'UserFollowController@destroy')->name('unfollow');

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Likable;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response as Http;
 
 class LikableController extends Controller
 {
@@ -16,21 +17,29 @@ class LikableController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        $likable->like();
+        try {
+            throw new \Exception('Something bad happened here.');
+            $likable->like();
 
-        return response(['status' => 'Like saved.']);
+        } catch (\Throwable $e) {
+
+            throw new BlogApiException($e);
+
+        }
+
+        return response(['status' => 'Like create.'], Http::HTTP_CREATED);
     }
 
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Like  $like
+     * @param  \App\Like $like
      * @return \Illuminate\Http\Response
      */
     public function destroy()

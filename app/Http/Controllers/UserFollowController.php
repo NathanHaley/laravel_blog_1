@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 class UserFollowController extends Controller
 {
+
     public function store(User $user)
     {
         return auth()->user()->follow($user->id);
