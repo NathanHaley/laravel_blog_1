@@ -42,7 +42,7 @@
             </div>
             <div v-else v-html="form.body" class="trix-content"></div>
         </div>
-        <div class="card-footer level" v-if="this.user != null && comment.user.id == this.user.id">
+        <div class="card-footer level" v-if="this.user != null && comment.user.name == this.user.name">
             <button class="btn btn-sm btn-primary mr-1" @click="editing = true">Edit</button>
             <button class="btn btn-sm btn-danger mr-1" @click="destroy">Delete</button>
         </div>
@@ -69,7 +69,7 @@
 
         computed: {
             ago() {
-                return moment(this.comment.created_at).fromNow();
+                return moment(this.comment.created_at.date).fromNow();
             },
             user() {
                 return window.App.user;

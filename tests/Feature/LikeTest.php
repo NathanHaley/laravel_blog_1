@@ -29,9 +29,10 @@ class LikeTest extends TestCase
     /** @test */
     public function guests_can_not_like_a_post()
     {
+        $this->withExceptionHandling();
         $post = create('post');
 
-        $post->like();
+        $response = $this->post(route('post.like', $post))->assertRedirect('login');
 
         $this->assertEquals(0, $post->likes_count);
 

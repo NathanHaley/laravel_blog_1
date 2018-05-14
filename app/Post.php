@@ -122,7 +122,8 @@ class Post extends Model
     }
 
 
-    static function breakPoint(int $monthsBack = 1) {
+    static function breakPoint(int $monthsBack = 1)
+    {
         return Post::orderby('created_at', 'desc')->pluck('created_at')->first()->subMonths($monthsBack);
     }
 
@@ -130,6 +131,21 @@ class Post extends Model
     static function archives(Carbon $breakPoint = null)
     {
         $breakPoint = $breakPoint ?? Carbon::now()->subMonth();
+
+        // SQLite for testing.
+        if (config('database.default') == 'sqlite') {
+            return static::select(
+                DB::raw('strftime("Y", created_at) as year, strftime("M", created_at) as monthName, strftime("M", created_at) as month')
+            )
+                ->where([
+                    ['locked', '=', false],
+                    ['created_at', '<', $breakPoint]
+                ])
+                ->groupby(['year', 'monthName', 'month'])
+                ->orderby('year', 'desc')
+                ->orderby('month', 'desc')
+                ->get();
+        }
 
         return static::select(
             DB::raw('year(created_at) as year, monthname(created_at) as monthName, month(created_at) as month')
@@ -142,6 +158,7 @@ class Post extends Model
             ->orderby('year', 'desc')
             ->orderby('month', 'desc')
             ->get();
+
     }
 
     public function path()
@@ -151,7 +168,9 @@ class Post extends Model
 
     public function getBannerPathAttribute($banner_path)
     {
-        if (isset($banner_path) && starts_with($banner_path, 'https://')) return $banner_path;
+        if (isset($banner_path) && starts_with($banner_path, 'https://')) {
+            return $banner_path;
+        }
 
         return ($banner_path) ? '/storage/' . $banner_path : null;
     }

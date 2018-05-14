@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -38,6 +39,13 @@ class User extends Authenticatable
     protected $casts = [
         'confirmed' => 'boolean',
     ];
+
+    protected $dates = [
+        'created_at',
+        'updated_at'
+    ];
+
+
 
     /**
      * @return string
@@ -110,6 +118,13 @@ class User extends Authenticatable
     {
         return $this->path();
     }
+
+//    public function getCreatedAtAttribute($created_at)
+//    {
+//        $dateTime = Carbon::create($created_at);
+//
+//        return $dateTime;
+//    }
 
     public function posts()
     {

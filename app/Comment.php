@@ -21,6 +21,8 @@ class Comment extends Model
         //    'deleted_at'
     ];
 
+    protected $dateFormat = 'Y-m-d H:i:s';
+
     static function validations($id = null)
     {
         return [

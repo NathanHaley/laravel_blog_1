@@ -11,7 +11,7 @@ class CommentController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth', ['except' => 'index']);
+        $this->middleware(['auth', 'confirmed'])->except('index');
     }
 
     /**
@@ -21,17 +21,7 @@ class CommentController extends Controller
      */
     public function index(Post $post)
     {
-        return  $post->comments()->paginate(25);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return  $post->comments()->paginate(2);
     }
 
     /**
@@ -55,47 +45,15 @@ class CommentController extends Controller
             'body' => $validData['body']
         ])->load('user');
 
-
-//
-//        Comment::create([
-//            'user_id' => auth()->id(),
-//            'post_id' => $post->id,
-//            'body' => $validData['body'],
-//        ]);
-//
-//        $post->commentsCountIncrement();
-//
-//        return back();//redirect(route('post.show', compact('post')));
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Comment  $comment
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Comment $comment)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Comment  $comment
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Comment $comment)
-    {
-        //
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Comment  $comment
+     * @param  \Illuminate\Http\Request $request
+     * @param  \App\Comment $comment
      * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function update(Request $request, Comment $comment)
     {

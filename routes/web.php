@@ -29,15 +29,15 @@ Route::get('/register/confirm', 'Auth\RegisterConfirmationController@index')->na
  * |--------------------------------------------------------------------------
  */
 
-Route::get('post/create', 'PostController@create')->middleware('must-be-confirmed')->name('post.create');
+Route::get('post/create', 'PostController@create')->name('post.create');
 Route::get('post/{post}/edit', 'PostController@edit')->name('post.edit');
 Route::get('post/{post}/delete', 'PostController@delete')->name('post.delete');
 Route::delete('post/{post}', 'PostController@destroy')->name('post.destroy');
 Route::patch('post/{post}', 'PostController@update');
 Route::post('post', 'PostController@store');
 Route::get('post/{post}/show', 'PostController@show')->name('post.show');
-Route::post('post/{post}/like', 'PostController@like');
-Route::delete('post/{post}/like', 'PostController@unlike');
+Route::post('post/{post}/like', 'PostController@like')->name('post.like');
+Route::delete('post/{post}/like', 'PostController@unlike')->name('post.unlike');
 
 Route::get('posts/archive/year/{year}/month/{month}', 'PostController@archives')
     ->where('year', '20[1-9]{2}')
@@ -49,12 +49,12 @@ Route::get('posts/archive/year/{year}/month/{month}', 'PostController@archives')
 
 Route::get('post/{channel}', 'PostController@channel')->name('channel.posts');
 
-Route::get('post/{post}/show/comment', 'CommentController@index')->name('comment.list');
-Route::post('post/{post}/show/comment', 'CommentController@store')->middleware('must-be-confirmed')->name('comment.create');
+Route::get('post/{post}/show/comment', 'Api\CommentController@index')->name('comment.list');
+Route::post('post/{post}/show/comment', 'CommentController@store')->name('comment.create');
 Route::patch('comment/{comment}', 'CommentController@update')->name('comment.update');
 Route::delete('comment/{comment}', 'CommentController@destroy')->name('comment.destroy');
-Route::post('post/{post}/comment/{comment}/like', 'CommentController@like');
-Route::delete('post/{post}/comment/{comment}/like', 'CommentController@unlike');
+Route::post('post/{post}/comment/{comment}/like', 'CommentController@like')->name('comment.like');
+Route::delete('post/{post}/comment/{comment}/like', 'CommentController@unlike')->name('comment.unlike');
 
 Route::get('profiles/{user}', 'ProfileController@show')->name('profile');
 Route::get('user/{user}/posts', 'PostController@index')->name('user-posts');
@@ -66,8 +66,8 @@ Route::delete('follow/{user}', 'UserFollowController@destroy')->name('unfollow')
 Route::get('/profiles/{user}/notifications', 'UserNotificationsController@index');
 Route::delete('/profiles/{user}/notifications/{notification}', 'UserNotificationsController@destroy');
 
-Route::post('/profiles/{user}/like', 'ProfileController@like');
-Route::delete('/profiles/{user}/like', 'ProfileController@unlike');
+Route::post('/profiles/{user}/like', 'ProfileController@like')->name('user.like');;
+Route::delete('/profiles/{user}/like', 'ProfileController@unlike')->name('user.like');;
 Route::post('api/users/{user}/avatar', 'Api\UserAvatarController@store')->name('avatar');
 
 /**

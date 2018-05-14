@@ -65068,7 +65068,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             return ['btn', this.userLiked ? 'btn-primary' : 'btn-outline-primary', this.addClasses];
         },
         endpoint: function endpoint() {
-            return this.path + '/like';
+            return this.path; // + '/like';
         }
     },
     methods: {
@@ -66125,7 +66125,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     computed: {
         ago: function ago() {
-            return __WEBPACK_IMPORTED_MODULE_1_moment___default()(this.comment.created_at).fromNow();
+            return __WEBPACK_IMPORTED_MODULE_1_moment___default()(this.comment.created_at.date).fromNow();
         },
         user: function user() {
             return window.App.user;
@@ -66575,7 +66575,7 @@ var render = function() {
             })
       ]),
       _vm._v(" "),
-      this.user != null && _vm.comment.user.id == this.user.id
+      this.user != null && _vm.comment.user.name == this.user.name
         ? _c("div", { staticClass: "card-footer level" }, [
             _c(
               "button",

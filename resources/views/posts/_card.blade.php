@@ -1,14 +1,11 @@
 <div class="card mt-5">
-    @auth
-        <div class="card-header"></div>
-    @endauth
     <div class="card-body post-card">
         @if(isset($show_avatar) && $show_avatar  === true)
             <avatar classes="post-card-avatar" username="{{ $post->user->name }}" avatar_path="{{ $post->user->avatar_path }}" width="4"></avatar>
         @endif
         <h5 class="card-title d-flex pt-3">
             <span>
-                {{ $post->title }}
+                <a style="color: black;" href="{{ route('post.show', $post) }}">{{ $post->title }}</a>
             </span>
             <span class="ml-auto">
                 <small class="text-muted">visits:</small> {{ $post->visits }}
