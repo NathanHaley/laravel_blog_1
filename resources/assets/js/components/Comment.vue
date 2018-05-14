@@ -69,7 +69,7 @@
 
         computed: {
             ago() {
-                return moment(this.comment.created_at.date).fromNow();
+                return moment.utc(this.comment.created_at.date).local().fromNow();
             },
             user() {
                 return window.App.user;

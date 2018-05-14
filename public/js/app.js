@@ -66125,7 +66125,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     computed: {
         ago: function ago() {
-            return __WEBPACK_IMPORTED_MODULE_1_moment___default()(this.comment.created_at.date).fromNow();
+            return __WEBPACK_IMPORTED_MODULE_1_moment___default.a.utc(this.comment.created_at.date).local().fromNow();
         },
         user: function user() {
             return window.App.user;

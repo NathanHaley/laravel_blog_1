@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class Comment extends Model
@@ -58,6 +59,11 @@ class Comment extends Model
     {
         return $this->post->path()."/comment/{$this->id}";
     }
+
+//    public function getCreatedAtAttribute($create_at)
+//    {
+//        return Carbon::parse($create_at)->setTimezone('America/Chicago');
+//    }
 
     public function pathAnchor()
     {
