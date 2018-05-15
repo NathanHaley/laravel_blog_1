@@ -53,8 +53,8 @@ Route::get('post/{post}/show/comment', 'Api\CommentController@index')->name('com
 Route::post('post/{post}/show/comment', 'CommentController@store')->name('comment.create');
 Route::patch('comment/{comment}', 'CommentController@update')->name('comment.update');
 Route::delete('comment/{comment}', 'CommentController@destroy')->name('comment.destroy');
-Route::post('post/{post}/comment/{comment}/like/like', 'CommentController@like')->name('comment.like');
-Route::delete('post/{post}/comment/{comment}/like/like', 'CommentController@unlike')->name('comment.unlike');
+Route::post('comment/{comment}/like', 'CommentController@like')->name('comment.like');
+Route::delete('comment/{comment}/like', 'CommentController@unlike')->name('comment.unlike');
 
 Route::get('profiles/{user}', 'ProfileController@show')->name('profile');
 Route::get('user/{user}/posts', 'PostController@index')->name('user-posts');

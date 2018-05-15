@@ -20,7 +20,7 @@ class Comment extends JsonResource
             'isLiked' => $this->isLiked(),
             'likes_count' => $this->likes_count,
             'created_at' => $this->created_at,
-            'path' => route('comment.like', ['post' => $this->post, 'comment' => $this]),
+            'path' => route('comment.update', ['comment' => $this]),
             'user' => new User($this->user)
         ];
 
