@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Resources\Comment as CommentResource;
 use App\Post;
-use App\Comment;
+use App\Comment as CommentModel;
 use Illuminate\Http\Request;
 use App\Http\Resources\CommentCollection;
+use Symfony\Component\HttpFoundation\Response as Http;
 
 class CommentController extends ApiController
 {
@@ -22,9 +24,11 @@ class CommentController extends ApiController
      */
     public function index(Post $post)
     {
-        $comments = new CommentCollection($post->comments()->paginate(2));
 
-        return  $this->respond($comments);
+        $comments = $post->comments()->with('user')->paginate(3);
+        $commentsCollection = new CommentCollection($comments);
+
+        return $this->respond($commentsCollection);
 
     }
 

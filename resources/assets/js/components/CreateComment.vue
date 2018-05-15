@@ -62,19 +62,6 @@
                         this.$emit('created', data);
                     });
 
-
-                // axios.post(location.pathname + '/comment', {body: this.body})
-                //     .catch(error => {
-                //         flash(error.response.data, 'danger');
-                //     })
-                //     .then(({data}) => {
-                //
-                //         this.element.reset();
-                //
-                //         flash('Your comment has been added.');
-                //
-                //         this.$emit('created', data);
-                //     });
             }
         }
     }

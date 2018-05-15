@@ -103,26 +103,14 @@
 
                         flash('Updated!');
                     });
-
-                // axios.patch(
-                //     '/comment/' + this.id, {
-                //         body: this.body
-                //     })
-                //     .catch(error => {
-                //         flash(error.response.data, 'danger');
-                //     }).then(({data}) => {
-                //
-                //     this.comment.body = this.body;
-                //     this.editing = false;
-                //
-                //     flash('Updated!');
-                // });
             },
 
-            destroy() {
-                axios.delete('/comment/' + this.id);
+            async destroy() {
+                await axios.delete('/comment/' + this.id);
 
                 this.$emit('deleted', this.id);
+
+                flash('Comment removed.', 'danger');
             },
         }
     };

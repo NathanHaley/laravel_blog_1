@@ -1,10 +1,12 @@
 <?php
 
+//TODO: Not used yet.
+
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class Comment extends JsonResource
+class Post extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -15,13 +17,15 @@ class Comment extends JsonResource
     public function toArray($request)
     {
         return [
-            'id' => $this->id,
+            'slug' => $this->slug,
+            'title' => $this->slug,
             'body' => $this->body,
             'isLiked' => $this->isLiked(),
             'likes_count' => $this->likes_count,
             'created_at' => $this->created_at,
-            'path' => route('comment.like', ['post' => $this->post, 'comment' => $this]),
-            'user' => new User($this->user)
+            'path' => $this->path,
+            'user' => new User($this->user),
+            'comments' => $this->comments()->paginate(1)
         ];
 
     }

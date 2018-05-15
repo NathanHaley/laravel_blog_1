@@ -3,11 +3,13 @@
 
         <create-comment @created="fetch"></create-comment>
 
+        <paginator :dataSet="dataSet" :totalPages="totalPages" @changed="fetch"></paginator>
+
         <div v-for="(comment, index) in items" :key="comment.id">
-            <comment :comment="comment" @deleted="remove(index)"></comment>
+            <comment :comment="comment" @deleted="deleted(index)"></comment>
         </div>
 
-        <paginator :dataSet="dataSet" @changed="fetch"></paginator>
+        <paginator :dataSet="dataSet" :totalPages="totalPages" @changed="fetch"></paginator>
 
 
     </div>
@@ -28,6 +30,9 @@
         data() {
             return {
                 dataSet: false,
+                totalPages: 1,
+                newPageCount: 0,
+
             }
         },
 
@@ -36,6 +41,20 @@
         },
 
         methods: {
+
+            deleted(index) {
+                this.items.splice(index, 1);
+
+                this.dataSet.meta.total -= 1;
+
+                this.newPageCount = Math.ceil((this.dataSet.meta.total) / this.dataSet.meta.per_page);
+
+                if (this.totalPages >= this.newPageCount) {
+                    this.fetch(this.dataSet.meta.current_page);
+                }
+
+            },
+
             fetch(page) {
                 axios.get(this.url(page)).then(this.refresh);
             },
@@ -51,8 +70,8 @@
 
             refresh({data}) {
                 this.dataSet = data;
+                this.totalPages = data.meta.last_page;
                 this.items = data.data;
-                window.scrollTo(0, 0);
             },
         }
     }

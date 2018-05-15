@@ -16,9 +16,4 @@ class CommentCollection extends ResourceCollection
     {
         return parent::toArray($request);
     }
-
-    public function with($request)
-    {
-        return ['status' => 'success'];
-    }
 }

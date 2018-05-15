@@ -24,6 +24,8 @@ class Post extends Model
         //    'deleted_at'
     ];
 
+    //protected $with = ['comments'];
+
     protected static function boot()
     {
         parent::boot();
@@ -112,15 +114,6 @@ class Post extends Model
         ];
     }
 
-    public function addComment(array $comment)
-    {
-        $comment = $this->comments()->create($comment);
-
-//        event(new UserPublishedNewComment($comment));
-
-        return $comment;
-    }
-
 
     static function breakPoint(int $monthsBack = 1)
     {
@@ -183,6 +176,24 @@ class Post extends Model
     public function getBodyAttribute($body)
     {
         return \Purify::clean($body);
+    }
+
+    public function addComment(array $commentArray)
+    {
+        //$comment = $this->comments()->create($comment);
+
+//        event(new UserPublishedNewComment($comment));
+        $comment = new Comment();
+
+        $comment->post_id = $this->id;
+        $comment->user_id = $commentArray['user_id'];
+        $comment->body = $commentArray['body'];
+
+        $comment->save();
+
+        $this->commentsCountIncrement();
+
+        return $comment;
     }
 
     /** Relationships */

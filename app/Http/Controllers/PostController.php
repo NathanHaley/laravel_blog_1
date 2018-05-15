@@ -115,6 +115,8 @@ class PostController extends Controller
     {
         $post->visitsIncrement();
 
+        //$post = new \App\Http\Resources\Post($post);
+
         return view('posts.show', compact('post'));
     }
 

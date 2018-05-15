@@ -2,7 +2,6 @@
 
 namespace App;
 
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class Comment extends Model
@@ -15,6 +14,8 @@ class Comment extends Model
     protected $with = ['user'];
 
     protected $appends = ['path', 'isLiked', 'likesCount'];
+
+    protected $fillable = ['id', 'body'];
 
     protected $dates = [
         'created_at',

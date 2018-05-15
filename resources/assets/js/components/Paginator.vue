@@ -1,15 +1,15 @@
 <template>
-    <ul class="pagination" v-if="shouldPaginate">
-        <li v-show="prevUrl" class="page-item">
+    <ul class="pagination mt-3" v-if="shouldPaginate">
+        <li :class="toggleDisabled(prevUrl)">
             <a class="page-link" href="#" aria-label="Previous" rel="prev" @click.prevent="page--">
-                <span aria-hidden="true">&laquo;</span>
+                <span aria-hidden="true">&laquo; Previous</span>
                 <span class="sr-only">Previous</span>
             </a>
         </li>
-        <!--<li class="page-item"><a class="page-link" href="#">1</a></li>-->
-        <li v-show="nextUrl" class="page-item">
+        <li v-for="index in numPages" :class="checkActive(index)"><a class="page-link" @click.prevent="page = index">{{ index }}</a></li>
+        <li :class="toggleDisabled(nextUrl)">
             <a class="page-link" href="#" aria-label="Next" rel="next" @click.prevent="page++">
-                <span aria-hidden="true">&raquo;</span>
+                <span aria-hidden="true">Next &raquo;</span>
                 <span class="sr-only">Next</span>
             </a>
         </li>
@@ -20,21 +20,28 @@
     export default {
         name: "Paginator",
 
-        props: ['dataSet'],
+        props: ['dataSet', 'totalPages'],
 
         data() {
             return {
                 page: 0,
                 prevUrl: false,
-                nextUrl: false
+                nextUrl: false,
+                numPages: 0,
             }
         },
 
         watch: {
             dataSet() {
-                this.page = this.dataSet.current_page;
-                this.prevUrl = this.dataSet.prev_page_url;
-                this.nextUrl = this.dataSet.next_page_url;
+                this.page = this.dataSet.meta.current_page;
+                this.prevUrl = this.dataSet.links.prev;
+                this.nextUrl = this.dataSet.links.next;
+                this.numPages = this.dataSet.meta.last_page;
+            },
+
+            totalPages() {
+                this.numPages = this.totalPages;
+                this.$forceUpdate();
             },
 
             page() {
@@ -45,10 +52,20 @@
         computed: {
             shouldPaginate() {
                 return !! this.prevUrl || !! this.nextUrl;
-            }
+            },
+
         },
 
         methods: {
+
+            toggleDisabled(url) {
+                return (url) ? 'page-item' : 'page-item disabled';
+            },
+
+            checkActive(index) {
+                return  (index == this.page) ? 'page-item active': 'page-item';
+            },
+
             broadcast() {
                 this.$emit('changed', this.page);
 

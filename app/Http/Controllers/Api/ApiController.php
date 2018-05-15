@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Resources\Json\ResourceCollection;
 use Illuminate\Support\Facades\Response;
 use Symfony\Component\HttpFoundation\Response as Http;
 
@@ -42,6 +43,13 @@ class ApiController extends Controller
 
     public function respond($data, $headers = [])
     {
+        if (is_subclass_of($data,  ResourceCollection::class)) {
+
+            return $data->response()->setStatusCode($this->getStatusCode());
+
+        }
+
+        // TODO: See about eliminating this.
         return Response::json([
             'data' => $data
             ], $this->getStatusCode(), $headers);
