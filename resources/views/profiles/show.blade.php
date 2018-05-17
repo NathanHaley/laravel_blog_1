@@ -22,7 +22,7 @@
                         @auth
                             <like-button
                                     path="{{ $profileUser->path }}"
-                                    likes-count="{{ $profileUser->likes_count }}"
+                                    likes-count="{{ $profileUser->liked_count }}"
                                     :is-liked="{{ json_encode($profileUser->isLiked) }}">
                             </like-button>
                         @endauth

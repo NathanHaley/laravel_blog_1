@@ -11,9 +11,9 @@ class Comment extends Model
 
     protected $guarded = [];
 
-    protected $with = ['user'];
+    protected $with = ['user', 'post'];
 
-    protected $appends = ['path', 'isLiked', 'likesCount'];
+    protected $appends = ['path', 'isLiked', 'likedCount'];
 
     protected $fillable = ['id', 'body'];
 

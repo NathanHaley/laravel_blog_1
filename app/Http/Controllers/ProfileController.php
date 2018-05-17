@@ -19,9 +19,11 @@ class ProfileController extends Controller
      */
     public function show(User $user)
     {
+        //TODO: Add some kind of pagination or chunking
+
         return view('profiles.show', [
             'profileUser' => $user,
-            'activities' => Activity::feed($user) //TODO: Activities for user
+            'activities' => Activity::feed($user)
         ]);
     }
 

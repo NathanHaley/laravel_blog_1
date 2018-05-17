@@ -16,6 +16,7 @@ class Post extends Model
     use LikableTrait;
 
     protected $guarded = [];
+    protected $appends = ['likedCount'];
     protected $recordableActivities = ['created', 'updated'];
 
     protected $dates = [
@@ -23,8 +24,6 @@ class Post extends Model
         'updated_at',
         //    'deleted_at'
     ];
-
-    //protected $with = ['comments'];
 
     protected static function boot()
     {

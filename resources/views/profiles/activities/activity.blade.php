@@ -6,7 +6,9 @@
             </span>
         </div>
     </div>
-    <div class="card-body trix-content">
-        {!! $body !!}
-    </div>
+    @isset($body)
+        <div class="card-body trix-content">
+            {!! $body !!}
+        </div>
+    @endisset
 </div>

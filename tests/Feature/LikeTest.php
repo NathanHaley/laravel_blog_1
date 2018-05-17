@@ -16,13 +16,13 @@ class LikeTest extends TestCase
 
         $post = create('post');
 
-        $post->like();
+        $this->post(route('post.like', $post));
 
-        $this->assertEquals(1, $post->likes_count);
+        $this->assertEquals(1, $post->fresh()->likes_count);
 
-        $post->unLike();
+        $this->delete(route('post.unlike', $post));
 
-        $this->assertEquals(1, $post->likes_count);
+        $this->assertEquals(0, $post->likes_count);
 
     }
 
@@ -32,9 +32,9 @@ class LikeTest extends TestCase
         $this->withExceptionHandling();
         $post = create('post');
 
-        $response = $this->post(route('post.like', $post))->assertRedirect('login');
+        $this->post(route('post.like', $post))->assertRedirect('login');
 
-        $this->assertEquals(0, $post->likes_count);
+        $this->assertEquals(0, $post->fresh()->likes_count);
 
     }
 
@@ -42,17 +42,19 @@ class LikeTest extends TestCase
     public function guests_can_not_unlike_a_post()
     {
 
-        $this->signIn();
+        $this->signIn()->withExceptionHandling();
 
         $post = create('post');
 
-        $post->like();
+        $this->post(route('post.like', $post));
+
+        $this->assertEquals(1, $post->fresh()->likes_count);
 
         $this->signOut();
 
-        $post->unLike();
+        $this->delete(route('post.unlike', $post))->assertRedirect('login');
 
-        $this->assertEquals(1, $post->likes_count);
+        $this->assertEquals(1, $post->fresh()->likes_count);
 
     }
 }

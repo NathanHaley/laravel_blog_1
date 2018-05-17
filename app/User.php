@@ -11,7 +11,9 @@ class User extends Authenticatable
     use Notifiable;
     use LikableTrait;
 
-    protected $appends = ['path', 'isLiked', 'likesCount'];
+    //protected $with = ['liked'];
+
+    protected $appends = ['path', 'isLiked', 'likedCount'];
     /**
      * The attributes that are mass assignable.
      *
@@ -44,6 +46,13 @@ class User extends Authenticatable
         'created_at',
         'updated_at'
     ];
+
+    public static function bootUser()
+    {
+        static::deleting(function ($model) {
+            $model->likes->each->delete();
+        });
+    }
 
 
 
@@ -119,13 +128,6 @@ class User extends Authenticatable
         return $this->path();
     }
 
-//    public function getCreatedAtAttribute($created_at)
-//    {
-//        $dateTime = Carbon::create($created_at);
-//
-//        return $dateTime;
-//    }
-
     public function posts()
     {
         return $this->hasMany(Post::class)->latest('created_at');
@@ -135,5 +137,12 @@ class User extends Authenticatable
     {
         return $this->hasMany(Comment::class);
     }
+
+    public function liked()
+    {
+        return $this->hasMany(Like::class);
+    }
+
+
 
 }

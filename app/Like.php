@@ -9,12 +9,20 @@ class Like extends Model
 {
     use RecordsActivity;
 
+    //protected $with = ['user'];
+
     protected $guarded = [];
 
     public function liked()
     {
         return $this->morphTo();
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
 
     static function likables($type = null)
     {
@@ -34,7 +42,7 @@ class Like extends Model
             ],
         ];
 
-        return $type === null ? $likables : $likables[$type];
+        return $type === $likables[$type] ?? $likables;
     }
 
     static function validations($type)
