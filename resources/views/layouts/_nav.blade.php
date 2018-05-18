@@ -38,6 +38,24 @@
                     </li>
                 </ul>
         @endcan
+            <ul class="navbar-nav">
+                <li class="nav-item dropdown">
+                    <a id="navbarDropdown2" class="nav-link dropdown-toggle" href="#" role="button"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                        Authors <span class="caret"></span>
+                    </a>
+
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown2">
+                        @foreach($authors as $author)
+                            <a class="dropdown-item" href="{{ route('profile', $author) }}">
+                                <avatar with-link="no" id="avatar-{{ $author->id }}" username="{{ $author->name }}"
+                                        avatar_path="{{ $author->avatar_path }}"></avatar>
+                                {{ $author->name }}
+                            </a>
+                        @endforeach
+                    </div>
+                </li>
+            </ul>
 
         <!-- Right Side Of Navbar -->
             <ul class="navbar-nav ml-auto">

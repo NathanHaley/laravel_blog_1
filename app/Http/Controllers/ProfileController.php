@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Post;
 use App\User;
 use App\Activity;
 
@@ -23,7 +24,9 @@ class ProfileController extends Controller
 
         return view('profiles.show', [
             'profileUser' => $user,
-            'activities' => Activity::feed($user)
+            'activities' => Activity::feed($user),
+            'archives' => Post::archives2(0, $user->id),
+            'archiveUser' => $user->name
         ]);
     }
 

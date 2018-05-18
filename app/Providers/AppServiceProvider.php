@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Channel;
+use App\User;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -14,9 +15,13 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-
+        // These are used in navigation
         \View::composer('*', function ($view) {
             $view->with('channels', Channel::all());
+        });
+
+        \View::composer('*', function ($view) {
+            $view->with('authors', User::where('id', '<', 7)->get());
         });
     }
 

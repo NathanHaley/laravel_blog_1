@@ -11,7 +11,7 @@ class AvatarTest extends TestCase
 
     /** @test */
     public function members_can_add_an_avatar()
-    {
+    {   create('post');
         $this->signIn();
         $user = auth()->user();
         $this->get(route('profile', $user))
@@ -22,6 +22,7 @@ class AvatarTest extends TestCase
     public function guests_can_not_add_an_avatar()
     {
         $user = create('user');
+        create('post');
 
         $this->get(route('profile', $user))
             ->assertDontSee('avatar-form');

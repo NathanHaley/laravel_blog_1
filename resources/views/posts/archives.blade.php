@@ -30,7 +30,7 @@
                 @endforeach
             </div>
             <aside class="blog-sidebar ml-auto">
-                @include('posts.archives-menu')
+                @include('posts.archives-menu', ['heading' => 'Archives', 'archiveUser' => $archiveUser])
             </aside>
         </div>
     </div>

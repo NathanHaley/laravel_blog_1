@@ -38,9 +38,11 @@
                     <avatar with-link="no" username="{{ $profileUser->name }}"
                             avatar_path="{{ $profileUser->avatar_path }}"></avatar>
                 @endcan
-
+                <hr>
             </div>
-            <hr>
+            <aside class="blog-sidebar ml-auto">
+                @include('posts.archives-menu', ['heading' => 'My Posts', 'archiveUser' => $archiveUser])
+            </aside>
         </div>
         <div class="row">
             <div class="col-md-10">

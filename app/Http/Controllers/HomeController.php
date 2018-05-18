@@ -37,7 +37,7 @@ class HomeController extends Controller
 
         $cards = Post::where(['featured_card' => true, 'locked' => false])->orderby('created_at')->paginate(2);
 
-        $archives = Post::archives($breakPoint);
+        $archives = Post::archives2(1);
 
 
         return view('index', compact('posts', 'banner', 'cards', 'archives'));

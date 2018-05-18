@@ -29,15 +29,33 @@ class PostController extends Controller
         return view('posts.index', compact('posts', 'user'));
     }
 
-    public function archives(int $year, string $monthName)
+    public function archives(int $year, string $monthName, string $archiveUser = null)
     {
-        $breakPoint = Post::breakPoint();
+        //$breakPoint = Post::breakPoint();
 
-        $archives = Post::archives($breakPoint);
+        $user = User::where('name', $archiveUser)->get();
+        $user = $user->toArray();
+        $archiveUserId = $user[0]['id'] ?? null;
 
-        $posts = Post::whereYear('created_at', $year)->whereMonth('created_at', Carbon::parse($monthName)->month)->orderby('created_at', 'desc')->get();
+        if (isset($archiveUserId)) {
+            $backMonths = 0;
 
-        return view('posts.archives', compact('posts', 'archives', 'year', 'monthName'));
+            $posts = Post::where('user_id', '=', 1)
+                ->whereYear('created_at', $year)
+                ->whereMonth('created_at', Carbon::parse($monthName)->month)
+                ->orderby('created_at', 'desc')->get();
+
+        } else {
+            $backMonths = 1;
+
+            $posts = Post::whereYear('created_at', $year)
+                ->whereMonth('created_at', Carbon::parse($monthName)->month)
+                ->orderby('created_at', 'desc')->get();
+        }
+
+        $archives = Post::archives2($backMonths, $archiveUserId);
+
+        return view('posts.archives', compact('posts', 'archives', 'year', 'monthName', 'archiveUser'));
     }
 
     /**

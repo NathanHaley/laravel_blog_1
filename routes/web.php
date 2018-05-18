@@ -39,7 +39,7 @@ Route::get('post/{post}/show', 'PostController@show')->name('post.show');
 Route::post('post/{post}/like', 'PostController@like')->name('post.like');
 Route::delete('post/{post}/like', 'PostController@unlike')->name('post.unlike');
 
-Route::get('posts/archive/year/{year}/month/{month}', 'PostController@archives')
+Route::get('posts/archive/year/{year}/month/{month}/{user?}', 'PostController@archives')
     ->where('year', '20[1-9]{2}')
     ->where('month','(January|February|March|April|May|June|July|August|September|October|November|December)' )
     ->name('post.archives');

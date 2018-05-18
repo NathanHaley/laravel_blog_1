@@ -77,6 +77,42 @@ class Post extends Model
         $this->attributes['slug'] = str_slug($title);
     }
 
+    static function archives2(int $monthsBack = 1, int $userId = null)
+    {
+        $breakPoint = static::breakPoint($monthsBack);
+
+        $posts = Post::where([
+                            ['user_id', (isset($userId))?'=':'<>', $userId],
+                            ['locked', '=', false],
+                            ['created_at', '<', $breakPoint],
+                        ])
+                        ->get([
+                        'slug',
+                        'title',
+                        'created_at as year',
+                        'created_at as month',
+                        'created_at as monthName'
+                    ]);
+
+        $posts = $posts->map(function ($post) {
+
+            $c = new Carbon($post['year']);
+            $post['year'] = $c->year;
+            $post['month'] = $c->month;
+            $post['monthName'] = $c->format('F');
+
+            return $post;
+        });
+
+        $posts = $posts->groupby(['year', 'monthName'])
+                        ->sortByDesc('year')
+                        ->sortByDesc('month');
+
+        //dd($posts);
+
+        return $posts;
+    }
+
     static function latestActive($limit = 3)
     {
         return static::latest()->limit($limit)->get();

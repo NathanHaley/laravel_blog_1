@@ -19,7 +19,7 @@
         </p>
     </div>
 
-    @include('posts.archives-menu')
+    @include('posts.archives-menu', ['heading' => 'Archives'])
 
     <div class="p-3">
         <h4 class="font-italic">Elsewhere</h4>
