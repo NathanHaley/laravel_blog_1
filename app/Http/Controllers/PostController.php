@@ -40,7 +40,7 @@ class PostController extends Controller
         if (isset($archiveUserId)) {
             $backMonths = 0;
 
-            $posts = Post::where('user_id', '=', 1)
+            $posts = Post::where('user_id', '=', $archiveUserId)
                 ->whereYear('created_at', $year)
                 ->whereMonth('created_at', Carbon::parse($monthName)->month)
                 ->orderby('created_at', 'desc')->get();

@@ -87,8 +87,6 @@ class Post extends Model
                             ['created_at', '<', $breakPoint],
                         ])
                         ->get([
-                        'slug',
-                        'title',
                         'created_at as year',
                         'created_at as month',
                         'created_at as monthName'
