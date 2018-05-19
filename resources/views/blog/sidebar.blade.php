@@ -23,7 +23,7 @@
 
     <div class="p-3">
         <h4 class="font-italic">Elsewhere</h4>
-        <ol class="list-unstyled">
+        <ol class="list-unstyled mt-2">
             <li><a href="https://github.com/NathanHaley/laravel_blog_1">GitHub</a></li>
         </ol>
     </div>

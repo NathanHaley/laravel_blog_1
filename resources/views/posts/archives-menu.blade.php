@@ -1,10 +1,13 @@
 <div class="p-3">
     <h4 class="font-italic">{{ $heading }} </h4>
-    <ol class="list-unstyled mb-0">
+    <ol class="list-unstyled mb-0 mt-2">
         @forelse($archives as $year => $months)
-            @foreach($months as $monthName => $posts)
-                    <li><a href="/posts/archive/year/{{ $year }}/month/{{ $monthName }}/{{ $archiveUser ?? '' }}">{{ $monthName }} {{ $year }}</a></li>
-            @endforeach
+            <li><h4 class="text-muted">{{ $year }}</h4></li>
+                <ol class="list-unstyled mb-2">
+                @foreach($months as $monthName => $posts)
+                        <li><a href="/posts/archive/year/{{ $year }}/month/{{ $monthName }}/{{ $archiveUser ?? '' }}">{{ $monthName }}</a></li>
+                @endforeach
+                </ol>
         @empty
             <li>No articles at this time</li>
         @endforelse

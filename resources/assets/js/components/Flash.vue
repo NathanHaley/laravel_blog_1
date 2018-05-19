@@ -1,20 +1,33 @@
 <template>
-    <div class="alert alert-flash"
+    <div class="alert"
          :class="'alert-' + level"
          role="alert"
          v-show="show"
-        v-text="body">
+        v-text="body"
+        :style="'z-index: 99; position: fixed; right: ' + this.fromRight + 'px; top: ' + this.fromTop + 'px;'"
+        >
     </div>
 </template>
 
 <script>
     export default {
-        props: ['message', 'type'],
+        props: {
+            message: {},
+            type: {},
+            right: {
+                default: 25
+            },
+            top: {
+                default: 25
+            }
+        },
 
         data() {
             return {
                 body: this.message,
                 level: this.type,
+                fromRight: this.right,
+                fromTop: this.top,
                 show: false
             };
         },
@@ -25,11 +38,14 @@
 
             window.events.$on('flash', data =>  this.flash(data));
         },
+
         methods: {
             flash(data) {
                 if(data) {
                     this.body = data.message;
                     this.level = data.level;
+                    this.fromRight = data.right;
+                    this.fromTop = data.top;
                 }
 
                 this.show = true;
@@ -39,16 +55,11 @@
             hide() {
                 setTimeout(() => {
                     this.show = false;
-                }, 3000);
+                }, 2000);
             }
         }
     };
 </script>
 
 <style>
-    .alert-flash {
-        position: fixed;
-        right: 25px;
-        top: 25px;
-    }
 </style>

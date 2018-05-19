@@ -5,7 +5,7 @@
         @endif
         <h5 class="card-title d-flex pt-3">
             <span>
-                <a style="color: black;" href="{{ route('post.show', $post) }}">{{ $post->title }}</a>
+                <a style="color: black;" class="blog-post-title" href="{{ route('post.show', $post) }}">{{ $post->title }}</a>
             </span>
             <span class="ml-auto">
                 <small class="text-muted">visits:</small> {{ $post->visits }}

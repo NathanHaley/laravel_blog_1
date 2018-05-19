@@ -12,6 +12,10 @@
             likesCount:{},
             isLiked: {
                 type: Boolean
+            },
+            loggedIn: {
+                type: Boolean,
+                default: true
             }
 
         },
@@ -31,7 +35,14 @@
             }
         },
         methods: {
-            toggle() {
+            toggle(event) {
+                if (this.loggedIn == false) {
+
+                    flash('Please login to participate.', 'danger', event.clientX - 250, event.clientY - 32);
+
+                    return;
+                }
+
                 return this.userLiked ? this.destroy() : this.create();
             },
             create() {

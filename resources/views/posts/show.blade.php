@@ -14,22 +14,23 @@
                     <h1 class="h1">
                         {{ $post->title }}
                     </h1>
-                    <h4 style="color: {{ $post->channel->color }};">
+                    <span class="h4" style="color: {{ $post->channel->color }};">
                         {{ ucwords($post->channel->name) }}
-                    </h4>
+                    </span>
                 </div>
 
                 <div class="d-flex">
-                    <h4>
+                    <span class="h4">
                         <avatar username="{{ $post->user->name }}"
                                 avatar_path="{{ $post->user->avatar_path }}"></avatar>
                         <span>
                             <a href="{{ route('profile', $post->user) }}">
                                 {{ $post->user->name }}
                             </a>
+                            <small class="h6 text-muted"> {{ $post->created_at->diffForHumans() }}</small>
                         </span>
                         @include('layouts._follow-button', $user = $post->user)
-                    </h4>
+                    </span>
 
                     <span class="ml-auto mr-3">
                         <small class="text-muted">visits:</small> {{ $post->visits }}
