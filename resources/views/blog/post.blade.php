@@ -1,6 +1,8 @@
 <div class="blog-post">
     <span class="d-flex">
-    <h2 class="blog-post-title">{{ $post->title }}</h2>
+        <a style="color: black" href="{{ route('post.show', $post) }}">
+            <h2 class="blog-post-title">{{ $post->title }}</h2>
+        </a>
         <span class="ml-auto">
             @auth
                 <like-button
@@ -33,9 +35,6 @@
              style="background: url('{{ $post->banner_path }}'); background-position: center center; background-repeat: no-repeat;"></div>
     @endif
     <p>{{ $post->lede }}</p>
-    <hr>
-    <p>{!! $post->body !!}</p>
-
-
+    <p><a href="{{ route('post.show', $post) }}">read more...</a></p>
 </div><!-- /.blog-post -->
 
