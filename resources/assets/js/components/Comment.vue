@@ -4,11 +4,13 @@
             <avatar :username="comment.user.name"
                     :avatar_path="comment.user.avatar_path"></avatar>
 
-            <h5 class="flex ml-3">
+            <span class="h5 flex ml-3">
                 <a :href="'/profiles/'+comment.user.name"
                    v-text="comment.user.name">
-                </a> said <span v-text="ago"></span>
-            </h5>
+                </a>
+                <span class="h5 text-muted small text-nowrap" v-text="ago"></span>
+            </span>
+
             <div v-if="signedIn" class="ml-auto">
                 <like-button
                         :path="comment.path"

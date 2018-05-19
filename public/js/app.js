@@ -66171,6 +66171,8 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 //
 //
 //
+//
+//
 
 
 
@@ -67332,13 +67334,16 @@ var render = function() {
             }
           }),
           _vm._v(" "),
-          _c("h5", { staticClass: "flex ml-3" }, [
+          _c("span", { staticClass: "h5 flex ml-3" }, [
             _c("a", {
               attrs: { href: "/profiles/" + _vm.comment.user.name },
               domProps: { textContent: _vm._s(_vm.comment.user.name) }
             }),
-            _vm._v(" said "),
-            _c("span", { domProps: { textContent: _vm._s(_vm.ago) } })
+            _vm._v(" "),
+            _c("span", {
+              staticClass: "h5 text-muted small text-nowrap",
+              domProps: { textContent: _vm._s(_vm.ago) }
+            })
           ]),
           _vm._v(" "),
           _vm.signedIn
