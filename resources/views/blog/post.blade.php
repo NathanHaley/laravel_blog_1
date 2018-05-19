@@ -3,10 +3,20 @@
         <a style="color: black" href="{{ route('post.show', $post) }}">
             <h2 class="blog-post-title">{{ $post->title }}</h2>
         </a>
-        <span class="ml-auto">
+        <span class="ml-auto text-right">
+            <button class="btn border-0 btn-outline-danger rounded-circle small" disabled>
+                visits
+                <br>
+                {{ $post->visits }}
+            </button>
+            <span>
+                <span class="rounded-circle text-nowrap">
+                    <i class="fa fa-comment"></i>
+                    {{ $post->comments_count }}
+                </span>
+            </span>
             @auth
                 <like-button
-
                         path="{{ $post->path() }}"
                         likes-count="{{ $post->likes_count }}"
                         :is-liked="{{ json_encode($post->isLiked) }}">

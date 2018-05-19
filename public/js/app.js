@@ -65093,7 +65093,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     computed: {
         classes: function classes() {
-            return ['btn', this.userLiked ? 'btn-primary' : 'btn-outline-primary', this.addClasses];
+            return ['btn rounded-circle', this.userLiked ? 'btn-primary' : 'btn-outline-primary', this.addClasses];
         },
         endpoint: function endpoint() {
             return this.path + '/like';
@@ -65133,11 +65133,19 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("button", { class: _vm.classes, on: { click: _vm.toggle } }, [
-    _c("span", { staticClass: "fa fa-heart" }),
-    _vm._v(" "),
-    _c("span", { domProps: { textContent: _vm._s(_vm.allLikesCount) } })
-  ])
+  return _c(
+    "button",
+    {
+      class: _vm.classes,
+      staticStyle: { border: "0" },
+      on: { click: _vm.toggle }
+    },
+    [
+      _c("span", { staticClass: "fa fa-heart" }),
+      _vm._v(" "),
+      _c("span", { domProps: { textContent: _vm._s(_vm.allLikesCount) } })
+    ]
+  )
 }
 var staticRenderFns = []
 render._withStripped = true

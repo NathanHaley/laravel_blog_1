@@ -1,5 +1,5 @@
 <template>
-    <button :class="classes" @click="toggle">
+    <button :class="classes" @click="toggle" style="border:0;">
         <span class="fa fa-heart"></span>
         <span v-text="allLikesCount"></span>
     </button>
@@ -28,7 +28,7 @@
         },
         computed: {
             classes() {
-                return ['btn', this.userLiked ? 'btn-primary' : 'btn-outline-primary', this.addClasses];
+                return ['btn rounded-circle', this.userLiked ? 'btn-primary' : 'btn-outline-primary', this.addClasses];
             },
             endpoint() {
                 return this.path + '/like';
