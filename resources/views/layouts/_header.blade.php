@@ -20,7 +20,6 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/blog.css') }}" rel="stylesheet">
 
-
     <style>
         .body {
             background-color: rgb(255, 255, 255);

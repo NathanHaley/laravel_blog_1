@@ -22,6 +22,7 @@
     "dependencies": {
         "font-awesome": "^4.7.0",
         "moment": "^2.22.1",
+        "sweet-modal-vue": "^2.0.0",
         "trix": "^0.11.2"
     }
 }

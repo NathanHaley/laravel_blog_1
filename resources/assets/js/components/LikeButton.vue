@@ -1,23 +1,37 @@
 <template>
-    <button :class="classes" @click="toggle" style="border:0;">
-        <span class="fa fa-heart"></span>
-        <span v-text="allLikesCount"></span>
-    </button>
+    <span>
+
+        <sweet-modal ref="modalLoginPrompt" title="<center style='font-family: Arial' class='mt-3'>Please login or register to participate</center>">
+
+            <sweet-modal-tab title="Login" id="tab1">
+                <p class="h4 text-center mb-3">Login</p>
+                <login-form></login-form>
+             </sweet-modal-tab>
+
+            <sweet-modal-tab title="Register" id="tab2">
+                <p class="h4 text-center mb-3">Register</p>
+                <registration-form></registration-form>
+            </sweet-modal-tab>
+
+        </sweet-modal>
+
+
+
+        <button :class="classes" @click="toggle" style="border:0;">
+            <span class="fa fa-heart"></span>
+            <span v-text="allLikesCount"></span>
+        </button>
+
+    </span>
 </template>
 <script>
     export default {
         props: {
-            addClasses:{},
-            path:{},
-            likesCount:{},
+            path: {},
+            likesCount: {},
             isLiked: {
                 type: Boolean
-            },
-            loggedIn: {
-                type: Boolean,
-                default: true
             }
-
         },
 
         data() {
@@ -28,7 +42,13 @@
         },
         computed: {
             classes() {
-                return ['btn rounded-circle', this.userLiked ? 'btn-primary' : 'btn-outline-primary', this.addClasses];
+                return [
+                    'btn rounded-circle',
+                    this.userLiked ?
+                        'btn-primary' :
+                        'btn-outline-primary',
+                    !window.App.signedIn ? 'disabled' : ''
+                ];
             },
             endpoint() {
                 return this.path + '/like';
@@ -36,9 +56,9 @@
         },
         methods: {
             toggle(event) {
-                if (this.loggedIn == false) {
-
-                    flash('Please login to participate.', 'danger', event.clientX - 250, event.clientY - 32);
+                if (window.App.signedIn === false) {
+                    this.$refs.modalLoginPrompt.open();
+                    //flash('Please login to participate.', 'danger', event.clientX - 225, event.clientY - 30);
 
                     return;
                 }

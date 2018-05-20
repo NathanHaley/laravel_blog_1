@@ -15,21 +15,11 @@
                     {{ $post->comments_count }}
                 </span>
             </span>
-            @auth
-                <like-button
-                        path="{{ $post->path() }}"
-                        likes-count="{{ $post->likes_count }}"
-                        :is-liked="{{ json_encode($post->isLiked) }}">
-                </like-button>
-                @else
-                <like-button
-                        add-classes="disabled"
-                        :logged-in="false"
-                        path="{{ $post->path() }}"
-                        likes-count="{{ $post->likes_count }}"
-                        :is-liked="{{ json_encode($post->isLiked) }}">
-                </like-button>
-            @endauth
+            <like-button
+                path="{{ $post->path() }}"
+                likes-count="{{ $post->likes_count }}"
+                :is-liked="{{ json_encode($post->isLiked) }}">
+            </like-button>
             @can('update', $post)
                 <a href="{{ route('post.edit', $post) }}" class="btn btn-outline-primary btn-xs">Edit</a>
             @endcan

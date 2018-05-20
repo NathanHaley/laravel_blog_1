@@ -20,9 +20,14 @@ Vue.component('like-button', require('./components/LikeButton.vue'));
 Vue.component('follow-button', require('./components/FollowButton.vue'));
 Vue.component('user-notifications', require('./components/UserNotifications.vue'));
 Vue.component('paginator', require('./components/Paginator.vue'));
+Vue.component('login-form', require('./components/LoginForm.vue'));
+Vue.component('registration-form', require('./components/RegistrationForm.vue'));
 
 Vue.component('post-show', require('./pages/Post.vue'));
 Vue.component('wysiwyg', require('./components/Wysiwyg.vue'));
+
+Vue.component('SweetModal', require('sweet-modal-vue/src/components/SweetModal'));
+Vue.component('SweetModalTab', require('sweet-modal-vue/src/components/SweetModalTab'));
 
 const app = new Vue({
     el: '#app'
