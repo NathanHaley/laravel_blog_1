@@ -69277,11 +69277,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     methods: {
         submitLogin: function submitLogin() {
-            this.form.post('/login').then(this.handleSubmit());
+            var _this = this;
+
+            this.form.post('/login').then(function (_ref) {
+                var data = _ref.data;
+
+                _this.handleSubmit();
+            });
         },
         handleSubmit: function handleSubmit() {
-
             this.loading = true;
+
             setTimeout(function () {
                 location.reload();
             }, 1000);
@@ -69698,11 +69704,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     methods: {
         submitRegistration: function submitRegistration() {
-            this.form.post('/register').then(this.handleSubmit());
+            var _this = this;
+
+            this.form.post('/register').then(function (_ref) {
+                var data = _ref.data;
+
+                _this.handleSubmit();
+            });
         },
         handleSubmit: function handleSubmit() {
-
             this.loading = true;
+
             setTimeout(function () {
                 location.reload();
             }, 1000);

@@ -115,17 +115,17 @@ export default {
         submitRegistration() {
             this.form
                 .post('/register')
-                .then(
-                   this.handleSubmit()
-                );
+                .then(({data}) => {
+                    this.handleSubmit();
+                });
         },
 
         handleSubmit() {
-
             this.loading = true;
+
             setTimeout(function () {
                 location.reload()
-            }, 1000)
+            }, 1000);
         }
     }
 }
