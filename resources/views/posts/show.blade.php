@@ -27,7 +27,7 @@
                             <a href="{{ route('profile', $post->user) }}">
                                 {{ $post->user->name }}
                             </a>
-                            <small class="h6 text-muted"> {{ $post->created_at->diffForHumans() }}</small>
+                            <small class="h6w text-muted"> {{ $post->created_at->diffForHumans() }}</small>
                         </span>
                         @include('layouts._follow-button', $user = $post->user)
                     </span>
