@@ -69847,14 +69847,7 @@ var render = function() {
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "form-group row" }, [
-              _c(
-                "label",
-                {
-                  staticClass: "col-sm-4 col-form-label text-md-right",
-                  attrs: { for: "password" }
-                },
-                [_vm._v("Password: 6 character minimum")]
-              ),
+              _vm._m(1),
               _vm._v(" "),
               _c("div", { staticClass: "col-md-6" }, [
                 _c("input", {
@@ -69958,7 +69951,7 @@ var render = function() {
               ])
             ]),
             _vm._v(" "),
-            _vm._m(1)
+            _vm._m(2)
           ])
     ]
   )
@@ -69971,6 +69964,26 @@ var staticRenderFns = [
     return _c("div", [
       _c("i", { staticClass: "fa fa-circle-o-notch fa-spin fa-5x" })
     ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "label",
+      {
+        staticClass: "col-sm-4 col-form-label text-md-right",
+        attrs: { for: "password" }
+      },
+      [
+        _vm._v("Password "),
+        _c("p", [
+          _c("small", { staticClass: "text-muted" }, [
+            _vm._v("6 character minimum")
+          ])
+        ])
+      ]
+    )
   },
   function() {
     var _vm = this

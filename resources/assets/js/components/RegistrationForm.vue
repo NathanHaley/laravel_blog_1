@@ -44,7 +44,7 @@
             </div>
 
             <div class="form-group row">
-                <label for="password" class="col-sm-4 col-form-label text-md-right">Password: 6 character minimum</label>
+                <label for="password" class="col-sm-4 col-form-label text-md-right">Password <p><small class="text-muted">6 character minimum</small></p></label>
 
                 <div class="col-md-6">
                     <input id="password"
