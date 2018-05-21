@@ -29,7 +29,7 @@ Vue.component('wysiwyg', require('./components/Wysiwyg.vue'));
 Vue.component('SweetModal', require('sweet-modal-vue/src/components/SweetModal'));
 Vue.component('SweetModalTab', require('sweet-modal-vue/src/components/SweetModalTab'));
 
-Vue.component('login-form-header', require('./inline/HeaderLoginRegistration.vue'));
+Vue.component('header-login-registration-form', require('./inline/HeaderLoginRegistrationForm.vue'));
 
 const app = new Vue({
     el: '#app'

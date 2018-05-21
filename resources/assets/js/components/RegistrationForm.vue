@@ -148,6 +148,10 @@
             },
         },
 
+        beforeDestroy () {
+            this.form.reset();
+        },
+
         methods: {
             submitRegistration() {
                 this.form
@@ -159,7 +163,6 @@
 
             handleSubmit() {
                 this.loading = true;
-
                 setTimeout(function () {
                     location.reload()
                 }, 1000);
