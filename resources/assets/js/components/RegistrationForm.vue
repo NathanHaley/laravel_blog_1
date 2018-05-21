@@ -1,132 +1,169 @@
 <template>
     <form class="pb-5" @submit.prevent="submitRegistration">
         <div v-if="loading" class="text-center h-250 mt-3">
-            <div><i class="fa fa-circle-o-notch fa-spin fa-5x"></i></div>
+            <div class="text-warning"><i class="fa fa-circle-o-notch fa-spin fa-5x"></i></div>
             <div class="mt-3">Loading...</div>
         </div>
-        <span v-else>
-            <div class="form-group row">
-                <label for="name" class="col-sm-4 col-form-label text-md-right">Name</label>
-
-                <div class="col-md-6 text-left">
-                    <input id="name"
-                           type="name"
-                           class="form-control"
-                           name="name"
-                           v-model="form.name"
-                           required
-                           autofocus
-                           @keydown="form.errors.clear('name')">
-
-                    <small id="nameErrors"
-                           class="text-danger"
-                           v-if="form.errors.has('name')"
-                           v-text="form.errors.get('name')"></small>
+        <div v-else>
+            <div class="row">
+                <div class="col-sm"></div>
+                <div class="col-sm-6 text-center">
+                    <div class="form-group">
+                        <label for="name" class="sr-only">Name</label>
+                        <input id="name"
+                               type="name"
+                               class="form-control"
+                               name="name"
+                               placeholder="Name"
+                               v-model="form.name"
+                               required
+                               autofocus
+                               @keydown="form.errors.clear('name')">
+                        <transition name="fade">
+                            <small id="nameErrors"
+                                   class="text-danger"
+                                   v-if="form.errors.has('name')">
+                                <i class="fa fa-exclamation"></i>
+                                <span v-text="form.errors.get('name')"></span>
+                            </small>
+                        </transition>
+                    </div>
                 </div>
+                <div class="col-sm"></div>
             </div>
-            <div class="form-group row">
-                <label for="email" class="col-sm-4 col-form-label text-md-right">Email Address</label>
-
-                <div class="col-md-6 text-left">
-                    <input id="email"
-                           type="email"
-                           class="form-control"
-                           name="email"
-                           v-model="form.email"
-                           required
-                           @keydown="form.errors.clear('email')">
-
-                    <small id="emailErrors"
-                        class="text-danger"
-                        v-if="form.errors.has('email')"
-                        v-text="'Email and/or password not found in our system.'"></small>
+            <div class="row">
+                <div class="col-sm"></div>
+                <div class="col-sm-6 text-center">
+                    <div class="form-group">
+                        <label for="email" class="sr-only">Email Address</label>
+                        <input id="email"
+                               type="email"
+                               class="form-control"
+                               name="email"
+                               placeholder="Email Address"
+                               v-model="form.email"
+                               required
+                               @keydown="form.errors.clear('email')">
+                        <transition name="fade">
+                            <small id="emailErrors"
+                                   class="text-danger"
+                                   v-if="form.errors.has('email')">
+                                <i class="fa fa-exclamation"></i>
+                                <span v-text="form.errors.get('email')"></span>
+                            </small>
+                        </transition>
+                    </div>
                 </div>
+                <div class="col-sm"></div>
             </div>
-
-            <div class="form-group row">
-                <label for="password" class="col-sm-4 col-form-label text-md-right">Password <p><small class="text-muted">6 character minimum</small></p></label>
-
-                <div class="col-md-6">
-                    <input id="password"
-                           type="password"
-                           class="form-control"
-                           name="password"
-                           v-model="form.password"
-                           required
-                           @keydown="form.errors.clear('password')">
-                    <small id="passwordErrors"
-                           class="text-danger"
-                           v-if="form.errors.has('password')"
-                           v-text="form.errors.get('password')"></small>
+            <div class="row">
+                <div class="col-sm"></div>
+                <div class="col-sm-6 text-center">
+                    <div class="form-group">
+                        <label for="password" class="sr-only">Password
+                        </label>
+                        <input id="password"
+                               type="password"
+                               class="form-control"
+                               name="password"
+                               placeholder="Password"
+                               v-model="form.password"
+                               required
+                               @keydown="form.errors.clear('password')">
+                        <transition name="fade" mode="out-in">
+                            <small key="error" id="passwordErrors"
+                                   class="text-danger"
+                                   v-if="form.errors.has('password')">
+                                <i class="fa fa-exclamation"></i>
+                                <span v-text="form.errors.get('password')"></span>
+                            </small>
+                            <small key="info" v-else class="text-muted">6 character minimum</small>
+                        </transition>
+                    </div>
                 </div>
+                <div class="col-sm"></div>
             </div>
-
-            <div class="form-group row">
-                <label for="password_confirmation" class="col-sm-4 col-form-label text-md-right">Confirm Password</label>
-
-                <div class="col-md-6">
-                    <input id="password_confirmation"
-                           type="password"
-                           class="form-control"
-                           name="password_confirmation"
-                           v-model="form.password_confirmation"
-                           required
-                           @keydown="form.errors.clear('password_confirmation')">
-                    <small id="passwordConfirmErrors"
-                           class="text-danger"
-                           v-if="form.errors.has('password_confirmation')"
-                           v-text="form.errors.get('password_confirmation')"></small>
+            <div class="row">
+                <div class="col-sm"></div>
+                <div class="col-sm-6 text-center">
+                    <div class="form-group">
+                        <label for="password_confirmation" class="sr-only">Confirm
+                            Password</label>
+                        <input id="password_confirmation"
+                               type="password"
+                               class="form-control"
+                               name="password_confirmation"
+                               placeholder="Confirm Password"
+                               v-model="form.password_confirmation"
+                               required
+                               @keydown="form.errors.clear('password_confirmation')">
+                        <transition name="fade">
+                            <small id="passwordConfirmErrors"
+                                   class="text-danger"
+                                   v-if="form.errors.has('password_confirmation')">
+                                <i class="fa fa-exclamation"></i>
+                                <span v-text="form.errors.get('password_confirmation')"></span>
+                            </small>
+                        </transition>
+                    </div>
                 </div>
+                <div class="col-sm"></div>
             </div>
-
-            <div class="form-group row mb-0">
-                <div class="col-md-8 offset-md-4 text-left">
-                    <button type="submit" class="btn btn-primary">
-                        Register
-                    </button>
+            <div class="row">
+                <div class="col-sm"></div>
+                <div class="col-sm-6 text-center">
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary w-100">
+                            Register
+                        </button>
+                    </div>
                 </div>
+                <div class="col-sm"></div>
             </div>
-        </span>
+        </div>
     </form>
 </template>
 
 <script>
-export default {
+    export default {
 
-    data() {
-        return {
-            form: new Form({
-                name: null,
-                email: null,
-                password: null,
-                password_confirmation: null
-            }),
-            loading: false
-        };
-    },
-
-    computed: {
-        user() {
-            return window.App.user;
-        },
-    },
-
-    methods: {
-        submitRegistration() {
-            this.form
-                .post('/register')
-                .then(({data}) => {
-                    this.handleSubmit();
-                });
+        data() {
+            return {
+                form: new Form({
+                    name: null,
+                    email: null,
+                    password: null,
+                    password_confirmation: null
+                }),
+                loading: false
+            };
         },
 
-        handleSubmit() {
-            this.loading = true;
+        computed: {
+            user() {
+                return window.App.user;
+            },
+        },
 
-            setTimeout(function () {
-                location.reload()
-            }, 1000);
+        methods: {
+            submitRegistration() {
+                this.form
+                    .post('/register')
+                    .then(({data}) => {
+                        this.handleSubmit();
+                    });
+            },
+
+            handleSubmit() {
+                this.loading = true;
+
+                setTimeout(function () {
+                    location.reload()
+                }, 1000);
+            }
         }
     }
-}
 </script>
+<style>
+
+</style>

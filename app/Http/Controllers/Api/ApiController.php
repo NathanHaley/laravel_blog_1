@@ -70,4 +70,9 @@ class ApiController extends Controller
         return $this->setStatusCode(Http::HTTP_CREATED)->respond(['message' => $message]);
     }
 
+    public function respondDestroyed($message = 'Destroyed Successfully.')
+    {
+        return $this->setStatusCode(Http::HTTP_NO_CONTENT)->respond(['message' => $message]);
+    }
+
 }

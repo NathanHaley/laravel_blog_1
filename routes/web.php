@@ -36,8 +36,8 @@ Route::delete('post/{post}', 'PostController@destroy')->name('post.destroy');
 Route::patch('post/{post}', 'PostController@update');
 Route::post('post', 'PostController@store');
 Route::get('post/{post}/show', 'PostController@show')->name('post.show');
-Route::post('post/{post}/like', 'PostController@like')->name('post.like');
-Route::delete('post/{post}/like', 'PostController@unlike')->name('post.unlike');
+Route::post('post/{post}/like', 'Api\LikableController@likePost')->name('post.like');
+Route::delete('post/{post}/like', 'Api\LikableController@unlikePost')->name('post.unlike');
 
 Route::get('posts/archive/year/{year}/month/{month}/{user?}', 'PostController@archives')
     ->where('year', '20[1-9]{2}')

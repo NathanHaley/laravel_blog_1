@@ -1,66 +1,87 @@
 <template>
     <form class="pb-5" @submit.prevent="submitLogin">
         <div v-if="loading" class="text-center h-250 mt-3">
-            <div><i class="fa fa-circle-o-notch fa-spin fa-5x"></i></div>
+            <div class="text-warning"><i class="fa fa-circle-o-notch fa-spin fa-5x"></i></div>
             <div class="mt-3">Loading...</div>
         </div>
-        <span v-else>
-            <div class="form-group row">
-                <label for="email" class="col-sm-4 col-form-label text-md-right">Email Address</label>
-
-                <div class="col-md-6 text-left">
-                    <input id="email"
-                           type="email"
-                           class="form-control"
-                           name="email"
-                           v-model="form.email"
-                           required
-                           autofocus
-                           @keydown="form.errors.clear('email')">
-
-                    <small id="emailErrors"
-                           class="text-danger"
-                           v-if="form.errors.has('email')"
-                           v-text="'Email and/or password not found in our system.'"></small>
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <label for="password" class="col-sm-4 col-form-label text-md-right">Password <p><small class="text-muted">6 character minimum</small></p></label>
-
-                <div class="col-md-6">
-                    <input id="password"
-                           type="password"
-                           class="form-control"
-                           name="password"
-                           v-model="form.password"
-                           required
-                           @keydown="form.errors.clear('email')">
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <div class="col-md-6 offset-md-4">
-                    <div class="checkbox text-left">
-                        <label>
-                            <input type="checkbox" name="remember" v-model="form.remember"> Remember Me
-                        </label>
+        <div v-else>
+            <div class="row">
+                <div class="col-sm"></div>
+                <div class="col-sm-6 text-center">
+                    <div class="form-group">
+                        <label for="email" class="sr-only">Email Address</label>
+                        <input id="email"
+                               type="email"
+                               class="form-control"
+                               placeholder="Email Address"
+                               name="email"
+                               v-model="form.email"
+                               required
+                               autofocus
+                               @keydown="form.errors.clear('email')">
+                        <transition name="fade">
+                            <small id="emailErrors"
+                                   class="text-danger"
+                                   v-if="form.errors.has('email')">
+                                <i class="fa fa-exclamation"></i> Email and/or password not found in our system.
+                            </small>
+                        </transition>
                     </div>
                 </div>
+                <div class="col-sm"></div>
             </div>
 
-            <div class="form-group row mb-0">
-                <div class="col-md-8 offset-md-4 text-left">
-                    <button type="submit" class="btn btn-primary">
-                        Login
-                    </button>
+            <div class="row">
+                <div class="col-sm"></div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="password" class="sr-only">Password</label>
+                        <div class="">
+                            <input id="password"
+                                   type="password"
+                                   class="form-control"
+                                   name="password"
+                                   placeholder="Password"
+                                   v-model="form.password"
+                                   required
+                                   @keydown="form.errors.clear('email')">
 
-                    <a class="btn btn-link" href="password/reset">
-                        Forgot Your Password?
-                    </a>
+                        </div>
+                    </div>
                 </div>
+                <div class="col-sm"></div>
             </div>
-        </span>
+
+            <div class="row">
+                <div class="col-sm"></div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <div class="checkbox text-center">
+                            <label>
+                                <input type="checkbox" name="remember" v-model="form.remember"> Remember Me
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm"></div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm"></div>
+                <div class="col-sm-6 text-center">
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary w-100 mb-3">
+                            Login
+                        </button>
+                        <br>
+                        <a class="btn btn-link" href="password/reset">
+                            Forgot Your Password?
+                        </a>
+                    </div>
+                </div>
+                <div class="col-sm"></div>
+            </div>
+        </div>
     </form>
 </template>
 

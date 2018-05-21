@@ -224,7 +224,7 @@ class PostController extends Controller
     }
 
     public function like(Post $post)
-    {
+    {   return json_encode(['message' => 'like entered.']);
         $post->like();
     }
 

@@ -58,7 +58,6 @@
             toggle(event) {
                 if (window.App.signedIn === false) {
                     this.$refs.modalLoginPrompt.open();
-                    //flash('Please login to participate.', 'danger', event.clientX - 225, event.clientY - 30);
 
                     return;
                 }

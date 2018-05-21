@@ -21,7 +21,7 @@
                         <button class="btn btn-sm btn-outline-secondary mr-3" @click="$refs.modalHeaderLoginPrompt.open()">Login</button>
                         <button class="btn btn-sm btn-outline-secondary" @click="$refs.modalHeaderLoginPrompt.open('tab2');">Register</button>
 
-                        <sweet-modal v-cloak ref="modalHeaderLoginPrompt" title="<center style='font-family: Arial' class='mt-3'>Login or register.</center>">
+                        <sweet-modal v-cloak ref="modalHeaderLoginPrompt" title="<center style='font-family: Arial' class='mt-3'>Login or Register</center>">
 
                             <sweet-modal-tab title="Login" id="tab1">
                                 <p class="h4 text-center mb-3">Login</p>

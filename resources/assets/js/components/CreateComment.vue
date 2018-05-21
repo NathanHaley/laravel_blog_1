@@ -23,7 +23,22 @@
             </form>
         </div>
         <div v-else>
-            <p class="text-center">Please <a href="/login">sign in</a> to participate.</p>
+            <sweet-modal ref="modalLoginPrompt" title="<center style='font-family: Arial' class='mt-3'>Please login or register to participate</center>">
+
+                <sweet-modal-tab title="Login" id="tab1">
+                    <p class="h4 text-center mb-3">Login</p>
+                    <login-form></login-form>
+                </sweet-modal-tab>
+
+                <sweet-modal-tab title="Register" id="tab2">
+                    <p class="h4 text-center mb-3">Register</p>
+                    <registration-form></registration-form>
+                </sweet-modal-tab>
+
+            </sweet-modal>
+
+            <p class="text-center">Please <button class="btn btn-link p-0 pb-1" @click="$refs.modalLoginPrompt.open()">sign in</button> to participate.</p>
+
         </div>
     </div>
 </template>
