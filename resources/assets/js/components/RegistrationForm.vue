@@ -7,7 +7,7 @@
         <div v-else>
             <div class="row">
                 <div class="col-sm"></div>
-                <div class="col-sm-6 text-center">
+                <div class="col-sm-6 text-left">
                     <div class="form-group">
                         <label for="name" class="sr-only">Name</label>
                         <input id="name"
@@ -33,7 +33,7 @@
             </div>
             <div class="row">
                 <div class="col-sm"></div>
-                <div class="col-sm-6 text-center">
+                <div class="col-sm-6 text-left">
                     <div class="form-group">
                         <label for="email" class="sr-only">Email Address</label>
                         <input id="email"
@@ -58,7 +58,7 @@
             </div>
             <div class="row">
                 <div class="col-sm"></div>
-                <div class="col-sm-6 text-center">
+                <div class="col-sm-6 text-left">
                     <div class="form-group">
                         <label for="password" class="sr-only">Password
                         </label>
@@ -71,13 +71,16 @@
                                required
                                @keydown="form.errors.clear('password')">
                         <transition name="fade" mode="out-in">
-                            <small key="error" id="passwordErrors"
-                                   class="text-danger"
-                                   v-if="form.errors.has('password')">
+                            <small v-if="form.errors.has('password')"
+                                   key="error"
+                                   id="passwordErrors"
+                                   class="text-danger">
                                 <i class="fa fa-exclamation"></i>
                                 <span v-text="form.errors.get('password')"></span>
                             </small>
-                            <small key="info" v-else class="text-muted">6 character minimum</small>
+                            <small v-else
+                                   key="info"
+                                   class="text-muted">6 character minimum</small>
                         </transition>
                     </div>
                 </div>
@@ -85,7 +88,7 @@
             </div>
             <div class="row">
                 <div class="col-sm"></div>
-                <div class="col-sm-6 text-center">
+                <div class="col-sm-6 text-left">
                     <div class="form-group">
                         <label for="password_confirmation" class="sr-only">Confirm
                             Password</label>
@@ -111,7 +114,7 @@
             </div>
             <div class="row">
                 <div class="col-sm"></div>
-                <div class="col-sm-6 text-center">
+                <div class="col-sm-6">
                     <div class="form-group">
                         <button type="submit" class="btn btn-primary w-100">
                             Register

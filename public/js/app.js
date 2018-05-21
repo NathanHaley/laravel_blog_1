@@ -65915,6 +65915,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -65985,54 +65993,17 @@ var render = function() {
             _c("div", { staticClass: "row" }, [
               _c("div", { staticClass: "col-sm" }),
               _vm._v(" "),
-              _c("div", { staticClass: "col-sm-6 text-center" }, [
+              _c("div", { staticClass: "col-sm-6" }, [
                 _c(
                   "div",
                   { staticClass: "form-group" },
                   [
-                    _c(
-                      "label",
-                      { staticClass: "sr-only", attrs: { for: "email" } },
-                      [_vm._v("Email Address")]
-                    ),
-                    _vm._v(" "),
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.form.email,
-                          expression: "form.email"
-                        }
-                      ],
-                      staticClass: "form-control",
-                      attrs: {
-                        id: "email",
-                        type: "email",
-                        placeholder: "Email Address",
-                        name: "email",
-                        required: "",
-                        autofocus: ""
-                      },
-                      domProps: { value: _vm.form.email },
-                      on: {
-                        keydown: function($event) {
-                          _vm.form.errors.clear("email")
-                        },
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(_vm.form, "email", $event.target.value)
-                        }
-                      }
-                    }),
-                    _vm._v(" "),
                     _c("transition", { attrs: { name: "fade" } }, [
                       _vm.form.errors.has("email")
                         ? _c(
                             "small",
                             {
+                              key: "loginErrors",
                               staticClass: "text-danger",
                               attrs: { id: "emailErrors" }
                             },
@@ -66048,6 +66019,54 @@ var render = function() {
                   ],
                   1
                 )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-sm" })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "row" }, [
+              _c("div", { staticClass: "col-sm" }),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-sm-6 text-center" }, [
+                _c("div", { staticClass: "form-group" }, [
+                  _c(
+                    "label",
+                    { staticClass: "sr-only", attrs: { for: "email" } },
+                    [_vm._v("Email Address")]
+                  ),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.form.email,
+                        expression: "form.email"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: {
+                      id: "email",
+                      type: "email",
+                      placeholder: "Email Address",
+                      name: "email",
+                      required: "",
+                      autofocus: ""
+                    },
+                    domProps: { value: _vm.form.email },
+                    on: {
+                      keydown: function($event) {
+                        _vm.form.errors.clear("email")
+                      },
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.form, "email", $event.target.value)
+                      }
+                    }
+                  })
+                ])
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "col-sm" })
@@ -66404,6 +66423,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -66475,7 +66497,7 @@ var render = function() {
             _c("div", { staticClass: "row" }, [
               _c("div", { staticClass: "col-sm" }),
               _vm._v(" "),
-              _c("div", { staticClass: "col-sm-6 text-center" }, [
+              _c("div", { staticClass: "col-sm-6 text-left" }, [
                 _c(
                   "div",
                   { staticClass: "form-group" },
@@ -66551,7 +66573,7 @@ var render = function() {
             _c("div", { staticClass: "row" }, [
               _c("div", { staticClass: "col-sm" }),
               _vm._v(" "),
-              _c("div", { staticClass: "col-sm-6 text-center" }, [
+              _c("div", { staticClass: "col-sm-6 text-left" }, [
                 _c(
                   "div",
                   { staticClass: "form-group" },
@@ -66626,7 +66648,7 @@ var render = function() {
             _c("div", { staticClass: "row" }, [
               _c("div", { staticClass: "col-sm" }),
               _vm._v(" "),
-              _c("div", { staticClass: "col-sm-6 text-center" }, [
+              _c("div", { staticClass: "col-sm-6 text-left" }, [
                 _c(
                   "div",
                   { staticClass: "form-group" },
@@ -66710,7 +66732,7 @@ var render = function() {
             _c("div", { staticClass: "row" }, [
               _c("div", { staticClass: "col-sm" }),
               _vm._v(" "),
-              _c("div", { staticClass: "col-sm-6 text-center" }, [
+              _c("div", { staticClass: "col-sm-6 text-left" }, [
                 _c(
                   "div",
                   { staticClass: "form-group" },
@@ -66810,7 +66832,7 @@ var staticRenderFns = [
     return _c("div", { staticClass: "row" }, [
       _c("div", { staticClass: "col-sm" }),
       _vm._v(" "),
-      _c("div", { staticClass: "col-sm-6 text-center" }, [
+      _c("div", { staticClass: "col-sm-6" }, [
         _c("div", { staticClass: "form-group" }, [
           _c(
             "button",
@@ -70420,7 +70442,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 

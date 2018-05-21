@@ -7,6 +7,22 @@
         <div v-else>
             <div class="row">
                 <div class="col-sm"></div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <transition name="fade">
+                            <small v-if="form.errors.has('email')"
+                                   key="loginErrors"
+                                   id="emailErrors"
+                                   class="text-danger">
+                                <i class="fa fa-exclamation"></i> Email and/or password not found in our system.
+                            </small>
+                        </transition>
+                    </div>
+                </div>
+                <div class="col-sm"></div>
+            </div>
+            <div class="row">
+                <div class="col-sm"></div>
                 <div class="col-sm-6 text-center">
                     <div class="form-group">
                         <label for="email" class="sr-only">Email Address</label>
@@ -19,18 +35,10 @@
                                required
                                autofocus
                                @keydown="form.errors.clear('email')">
-                        <transition name="fade">
-                            <small id="emailErrors"
-                                   class="text-danger"
-                                   v-if="form.errors.has('email')">
-                                <i class="fa fa-exclamation"></i> Email and/or password not found in our system.
-                            </small>
-                        </transition>
                     </div>
                 </div>
                 <div class="col-sm"></div>
             </div>
-
             <div class="row">
                 <div class="col-sm"></div>
                 <div class="col-sm-6">
