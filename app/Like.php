@@ -3,27 +3,52 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Validation\Rule;
 
+/**
+ * Class Like
+ * @package App
+ */
 class Like extends Model
 {
     use RecordsActivity;
 
-    //protected $with = ['user'];
+    /**
+     * @var array
+     */
+    protected $fillable = [
+        'user_id',
+        'liked_id',
+        'liked_type'
+    ];
 
-    protected $guarded = [];
+    /**
+     * @var array
+     */
+    protected $casts = [
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime'
+    ];
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\MorphTo
+     */
     public function liked()
     {
         return $this->morphTo();
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function user()
     {
         return $this->belongsTo(User::class);
     }
 
-
+    /**
+     * @param null $type
+     * @return array|bool
+     */
     static function likables($type = null)
     {
 
@@ -45,6 +70,10 @@ class Like extends Model
         return $type === $likables[$type] ?? $likables;
     }
 
+    /**
+     * @param $type
+     * @return array
+     */
     static function validations($type)
     {
         return [

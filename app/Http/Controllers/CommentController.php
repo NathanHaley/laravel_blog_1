@@ -40,7 +40,6 @@ class CommentController extends Controller
         $validData = $request->validate(Comment::validations());
 
         return $post->addComment([
-            'user_id' => auth()->id(),
             'body' => $validData['body']
         ])->load('user');
 

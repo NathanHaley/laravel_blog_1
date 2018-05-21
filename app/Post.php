@@ -2,29 +2,59 @@
 
 namespace App;
 
-use App\Events\UserPublishedNewPost;
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\DB;
+use App\Events\UserPublishedNewPost;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Class Post
+ * @package App
+ */
 class Post extends Model
 {
     use RecordsActivity;
     use LikableTrait;
 
-    protected $guarded = [];
-    protected $appends = ['likedCount'];
+    /**
+     * @var array
+     */
     protected $recordableActivities = ['created', 'updated'];
 
-    protected $dates = [
-        'created_at',
-        'updated_at',
-        //    'deleted_at'
+    /**
+     * @var array
+     */
+    protected $fillable = [
+        'user_id',
+        'channel_id',
+        'title',
+        'lede',
+        'body',
+        'locked',
+        'featured_banner',
+        'featured_card',
+        'banner_path',
+        'card_path'
     ];
 
+    /**
+     * @var array
+     */
+    protected $appends = ['likedCount'];
+
+    /**
+     * @var array
+     */
+    protected $casts = [
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime'
+    ];
+
+    /**
+     *
+     */
     protected static function boot()
     {
         parent::boot();
@@ -39,6 +69,9 @@ class Post extends Model
         });
     }
 
+    /**
+     *
+     */
     public function removeBannerImage()
     {
         if ($this->banner_path != null) {
@@ -47,6 +80,9 @@ class Post extends Model
         }
     }
 
+    /**
+     *
+     */
     public function removeCardImage()
     {
         if ($this->card_path != null) {
@@ -77,6 +113,11 @@ class Post extends Model
         $this->attributes['slug'] = str_slug($title);
     }
 
+    /**
+     * @param int $monthsBack
+     * @param int|null $userId
+     * @return mixed
+     */
     static function archives2(int $monthsBack = 1, int $userId = null)
     {
         $breakPoint = static::breakPoint($monthsBack);
@@ -106,54 +147,13 @@ class Post extends Model
                         ->sortByDesc('year')
                         ->sortByDesc('month');
 
-        //dd($posts);
-
         return $posts;
     }
 
-    static function latestActive($limit = 3)
-    {
-        return static::latest()->limit($limit)->get();
-    }
-
-    public function visitsIncrement()
-    {
-        static::increment('visits');
-    }
-
-    public function commentsCountIncrement()
-    {
-        static::increment('comments_count');
-    }
-
-    public function commentsCountDecrement()
-    {
-        static::decrement('comments_count');
-    }
-
-    static function validations($id = null)
-    {
-        return [
-            'title' => [
-                'required',
-                $id === null ? '' : Rule::unique('posts')->ignore($id),
-                'max:100',
-            ],
-            'banner_path' => 'image|max:5000',
-            'card_path' => 'image|max:1000',
-            'lede' => 'required|max:250',
-            'body' => 'required|max:65000',
-            'channel_id' => 'required|exists:channels,id'
-        ];
-    }
-
-
-    static function breakPoint(int $monthsBack = 1)
-    {
-        return Post::orderby('created_at', 'desc')->pluck('created_at')->first()->subMonths($monthsBack);
-    }
-
-
+    /**
+     * @param Carbon|null $breakPoint
+     * @return mixed
+     */
     static function archives(Carbon $breakPoint = null)
     {
         $breakPoint = $breakPoint ?? Carbon::now()->subMonth();
@@ -187,11 +187,81 @@ class Post extends Model
 
     }
 
+    /**
+     * @param int $limit
+     * @return mixed
+     */
+    static function latestActive($limit = 3)
+    {
+        return static::latest()->limit($limit)->get();
+    }
+
+    /**
+     *
+     */
+    public function visitsIncrement()
+    {
+        static::increment('visits');
+    }
+
+    /**
+     *
+     */
+    public function commentsCountIncrement()
+    {
+        static::increment('comments_count');
+    }
+
+    /**
+     *
+     */
+    public function commentsCountDecrement()
+    {
+        static::decrement('comments_count');
+    }
+
+    /**
+     * @param null $id
+     * @return array
+     */
+    static function validations($id = null)
+    {
+        return [
+            'title' => [
+                'required',
+                $id === null ? '' : Rule::unique('posts')->ignore($id),
+                'max:100',
+            ],
+            'banner_path' => 'image|max:5000',
+            'card_path' => 'image|max:1000',
+            'lede' => 'required|max:250',
+            'body' => 'required|max:65000',
+            'channel_id' => 'required|exists:channels,id'
+        ];
+    }
+
+
+    /**
+     * @param int $monthsBack
+     * @return mixed
+     */
+    static function breakPoint(int $monthsBack = 1)
+    {
+        return Post::orderby('created_at', 'desc')->pluck('created_at')->first()->subMonths($monthsBack);
+    }
+
+    /**
+     * @return string
+     */
     public function path()
     {
         return "/post/{$this->slug}";
     }
 
+    /**
+     * @param $banner_path
+     * @return null|string
+     */
     public function getBannerPathAttribute($banner_path)
     {
         if (isset($banner_path) && starts_with($banner_path, 'https://')) {
@@ -201,25 +271,34 @@ class Post extends Model
         return ($banner_path) ? '/storage/' . $banner_path : null;
     }
 
+    /**
+     * @param $cardPath
+     * @return null|string
+     */
     public function getCardPathAttribute($cardPath)
     {
         return ($cardPath) ? '/storage/' . $cardPath : null;
     }
 
+    /**
+     * @param $body
+     * @return array|string
+     */
     public function getBodyAttribute($body)
     {
         return \Purify::clean($body);
     }
 
+    /**
+     * @param array $commentArray
+     * @return Comment
+     */
     public function addComment(array $commentArray)
     {
-        //$comment = $this->comments()->create($comment);
-
-//        event(new UserPublishedNewComment($comment));
         $comment = new Comment();
 
         $comment->post_id = $this->id;
-        $comment->user_id = $commentArray['user_id'];
+        $comment->user_id = auth()->id();
         $comment->body = $commentArray['body'];
 
         $comment->save();
@@ -229,17 +308,25 @@ class Post extends Model
         return $comment;
     }
 
-    /** Relationships */
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function user()
     {
         return $this->belongsTo(User::class);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function channel()
     {
         return $this->belongsTo(Channel::class);
     }
 
+    /**
+     * @return $this
+     */
     public function comments()
     {
         return $this->hasMany(Comment::class)->orderByDesc('created_at');

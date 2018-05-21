@@ -4,27 +4,50 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Class Comment
+ * @package App
+ */
 class Comment extends Model
 {
-
     use LikableTrait;
 
-    protected $guarded = [];
-
+    /**
+     * @var array
+     */
     protected $with = ['user', 'post'];
 
-    protected $appends = ['path', 'isLiked', 'likedCount'];
-
-    protected $fillable = ['id', 'body'];
-
-    protected $dates = [
-        'created_at',
-        'updated_at',
-        //    'deleted_at'
+    /**
+     * @var array
+     */
+    protected $fillable = [
+        'post_id',
+        'user_id',
+        'body'
     ];
 
+    /**
+     * @var array
+     */
+    protected $appends = ['path', 'isLiked', 'likedCount'];
+
+    /**
+     * @var array
+     */
+    protected $casts = [
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime'
+    ];
+
+    /**
+     * @var string
+     */
     protected $dateFormat = 'Y-m-d H:i:s';
 
+    /**
+     * @param null $id
+     * @return array
+     */
     static function validations($id = null)
     {
         return [
@@ -32,6 +55,10 @@ class Comment extends Model
         ];
     }
 
+    /**
+     * @param $body
+     * @return array|string
+     */
     public function getBodyAttribute($body)
     {
         return \Purify::clean($body);
@@ -51,31 +78,41 @@ class Comment extends Model
         );
     }
 
+    /**
+     * @return string
+     */
     public function path()
     {
         return $this->post->path()."/comment/{$this->id}";
     }
 
+    /**
+     * @return string
+     */
     public function getPathAttribute()
     {
         return $this->post->path()."/comment/{$this->id}";
     }
 
-//    public function getCreatedAtAttribute($create_at)
-//    {
-//        return Carbon::parse($create_at)->setTimezone('America/Chicago');
-//    }
-
+    /**
+     * @return string
+     */
     public function pathAnchor()
     {
         return "#comment-{$this->id}";
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function user()
     {
         return $this->belongsTo(User::class);
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function post() {
         return $this->belongsTo(Post::class);
     }

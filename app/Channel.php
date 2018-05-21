@@ -2,31 +2,36 @@
 
 namespace App;
 
-use App\Post;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+/**
+ * Class Channel
+ * @package App
+ */
 class Channel extends Model
 {
     use SoftDeletes;
+
+    /**
+     * @var array
+     */
+    protected $fillable = [
+        'name',
+        'description',
+        'color'
+    ];
 
     /**
      * The attributes that should be mutated to dates.
      *
      * @var array
      */
-    protected $dates = [
-        'created_at',
-        'updated_at',
-        'deleted_at'
+    protected $casts = [
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
+        'deleted_at' => 'datetime'
     ];
-
-    /**
-     * The attributes that aren't mass assignable.
-     *
-     * @var array
-     */
-    protected $guarded = [];
 
     /**
      * Boot the channel model.
@@ -40,6 +45,10 @@ class Channel extends Model
         });
     }
 
+    /**
+     * @param null $id
+     * @return array
+     */
     static function validations($id = null)
     {
         return [
