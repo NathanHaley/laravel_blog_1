@@ -114,6 +114,9 @@ class Post extends Model
     }
 
     /**
+     * Get posts starting number of months back, e.g. start with last month, and by optional user.
+     * Works with MySQL and SQLite
+     *
      * @param int $monthsBack
      * @param int|null $userId
      * @return mixed
@@ -127,6 +130,7 @@ class Post extends Model
                             ['locked', '=', false],
                             ['created_at', '<', $breakPoint],
                         ])
+                        ->orderby('year', 'desc')
                         ->get([
                         'created_at as year',
                         'created_at as month',
@@ -151,6 +155,9 @@ class Post extends Model
     }
 
     /**
+     *  Using raw queries get posts starting number of months back, e.g. start with last month
+     *  Works with MySQL and SQLite
+     *
      * @param Carbon|null $breakPoint
      * @return mixed
      */
