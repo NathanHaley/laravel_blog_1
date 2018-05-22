@@ -13453,8 +13453,8 @@ a.text-dark:focus {
 
 .fade-enter-active,
 .fade-leave-active {
-  -webkit-transition: opacity 0.5s;
-  transition: opacity 0.5s;
+  -webkit-transition: opacity 0.4s;
+  transition: opacity 0.4s;
 }
 
 .fade-enter,

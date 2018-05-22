@@ -78,7 +78,7 @@
                 <div class="col-sm"></div>
                 <div class="col-sm-6 text-center">
                     <div class="form-group">
-                        <button type="submit" class="btn btn-primary w-100 mb-3">
+                        <button :disabled="form.errors.any()" type="submit" class="btn btn-primary w-100 mb-3">
                             Login
                         </button>
                         <br>
@@ -105,16 +105,6 @@
                 }),
                 loading: false
             };
-        },
-
-        computed: {
-            user() {
-                return window.App.user;
-            },
-        },
-
-        beforeDestroy () {
-            this.form.reset();
         },
 
         methods: {

@@ -116,7 +116,7 @@
                 <div class="col-sm"></div>
                 <div class="col-sm-6">
                     <div class="form-group">
-                        <button type="submit" class="btn btn-primary w-100">
+                        <button :disabled="form.errors.any()" type="submit" class="btn btn-primary w-100">
                             Register
                         </button>
                     </div>
@@ -140,16 +140,6 @@
                 }),
                 loading: false
             };
-        },
-
-        computed: {
-            user() {
-                return window.App.user;
-            },
-        },
-
-        beforeDestroy () {
-            this.form.reset();
         },
 
         methods: {
