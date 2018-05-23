@@ -98,7 +98,7 @@ class User extends Authenticatable
     /**
      * @param null $user_id
      */
-    public function follow($user_id = null)
+    public function follow(int $user_id = null)
     {
         //TODO: Add validation
         //TODO: Maybe use relationship is better?
@@ -106,7 +106,6 @@ class User extends Authenticatable
         $this->follows()->create([
             'follow_id' => $user_id
         ]);
-        
 
        static::where('id', $user_id)->increment('follows_count', 1);
 
@@ -115,13 +114,12 @@ class User extends Authenticatable
     /**
      * @param null $user_id
      */
-    public function unfollow($user_id = null)
+    public function unfollow(int $user_id = null)
     {
         //TODO: Add validation
         //TODO: Maybe use relationship is better?
 
         UserFollow::where(['user_id' => auth()->user()->id, 'follow_id' => $user_id])->delete();
-
 
         static::where('id', $user_id)->decrement('follows_count', 1);
     }

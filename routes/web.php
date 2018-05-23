@@ -60,8 +60,8 @@ Route::get('profiles/{user}', 'ProfileController@show')->name('profile');
 Route::get('user/{user}/posts', 'PostController@index')->name('user-posts');
 //Route::get('/api/users', 'Api\UserController@index');
 
-Route::post('follow/{user}', 'UserFollowController@store')->name('follow');
-Route::delete('follow/{user}', 'UserFollowController@destroy')->name('unfollow');
+Route::post('follow/{user}', 'Api\UserFollowController@store')->name('follow');
+Route::delete('follow/{user}', 'Api\UserFollowController@destroy')->name('unfollow');
 
 Route::get('/profiles/{user}/notifications', 'UserNotificationsController@index');
 Route::delete('/profiles/{user}/notifications/{notification}', 'UserNotificationsController@destroy');

@@ -65,14 +65,19 @@ class ApiController extends Controller
         ]);
     }
 
-    public function respondCreated($message = 'Created Successfully.')
+    public function respondCreated($message = 'Created Successfully')
     {
         return $this->setStatusCode(Http::HTTP_CREATED)->respond(['message' => $message]);
     }
 
-    public function respondDestroyed($message = 'Destroyed Successfully.')
+    public function respondDestroyed($message = 'Destroyed Successfully')
     {
         return $this->setStatusCode(Http::HTTP_NO_CONTENT)->respond(['message' => $message]);
+    }
+
+    public function respondUnauthorized($message = 'Unauthorized')
+    {
+        return $this->setStatusCode(Http::HTTP_UNAUTHORIZED)->respond(['message' => $message]);
     }
 
 }

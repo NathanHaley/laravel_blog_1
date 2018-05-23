@@ -10,10 +10,8 @@ class NotificationTest extends TestCase
     use RefreshDatabase;
 
     /** @test */
-    public function notifications_are_generated_when_followed_user_creates_a_post()
+    public function at_()
     {
-
-
-        $this->assertNotCount(0, config('blog.administrators'));
+       //
     }
 }

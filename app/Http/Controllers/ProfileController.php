@@ -32,6 +32,7 @@ class ProfileController extends Controller
 
     /**
      * @param User $user
+     * @throws \App\Exceptions\BlogApiException
      */
     public function like(User $user)
     {
@@ -40,6 +41,7 @@ class ProfileController extends Controller
 
     /**
      * @param User $user
+     * @throws \App\Exceptions\BlogApiException
      */
     public function unlike(User $user)
     {
