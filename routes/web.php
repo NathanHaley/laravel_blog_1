@@ -34,7 +34,7 @@ Route::get('post/{post}/edit', 'PostController@edit')->name('post.edit');
 Route::get('post/{post}/delete', 'PostController@delete')->name('post.delete');
 Route::delete('post/{post}', 'PostController@destroy')->name('post.destroy');
 Route::patch('post/{post}', 'PostController@update');
-Route::post('post', 'PostController@store');
+Route::post('post', 'PostController@store')->name('post.store');
 Route::get('post/{post}/show', 'PostController@show')->name('post.show');
 Route::post('post/{post}/like', 'Api\LikableController@likePost')->name('post.like');
 Route::delete('post/{post}/like', 'Api\LikableController@unlikePost')->name('post.unlike');
@@ -63,8 +63,8 @@ Route::get('user/{user}/posts', 'PostController@index')->name('user-posts');
 Route::post('follow/{user}', 'Api\UserFollowController@store')->name('follow');
 Route::delete('follow/{user}', 'Api\UserFollowController@destroy')->name('unfollow');
 
-Route::get('/profiles/{user}/notifications', 'UserNotificationsController@index');
-Route::delete('/profiles/{user}/notifications/{notification}', 'UserNotificationsController@destroy');
+Route::get('/notifications', 'Api\UserNotificationsController@index')->name('notifications.get');
+Route::delete('/notifications/{notification}', 'Api\UserNotificationsController@destroy')->name('notification.destroy');
 
 Route::post('/profiles/{user}/like', 'ProfileController@like')->name('user.like');;
 Route::delete('/profiles/{user}/like', 'ProfileController@unlike')->name('user.like');;

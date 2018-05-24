@@ -48,6 +48,6 @@ class UserFollow extends Model
      */
     public function notify(Post $post)
     {
-        $this->user->notify(new UserPublishedPost($this->user, $post));
+        $this->user->notify(new UserPublishedPost(auth()->user(), $post));
     }
 }

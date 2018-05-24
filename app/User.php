@@ -144,6 +144,14 @@ class User extends Authenticatable
     }
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function followers()
+    {
+        return $this->hasMany(UserFollow::class, 'follow_id');
+    }
+
+    /**
      * @return string
      */
     public function path()

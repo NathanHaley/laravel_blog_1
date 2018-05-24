@@ -65431,7 +65431,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     created: function created() {
         var _this = this;
 
-        axios.get("/profiles/" + window.App.user.name + "/notifications").then(function (response) {
+        axios.get("/notifications").then(function (response) {
             return _this.notifications = response.data;
         });
     },
@@ -65439,7 +65439,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     methods: {
         markAsRead: function markAsRead(notification) {
-            axios.delete("/profiles/" + window.App.user.name + "/notifications/" + notification.id);
+            axios.delete("/notifications/" + notification.id);
         }
     }
 });
@@ -65498,7 +65498,8 @@ var staticRenderFns = [
         }
       },
       [
-        _vm._v("\n        Notifications!"),
+        _c("i", { attrs: { class: "fa fa-exclamation pr-1" } }),
+        _vm._v("Notifications"),
         _c("span", { attrs: { class: "caret" } })
       ]
     )

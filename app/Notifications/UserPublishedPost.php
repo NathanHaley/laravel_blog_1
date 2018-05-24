@@ -41,7 +41,7 @@ class UserPublishedPost extends Notification
     {
         return [
             'message' => $this->user->name.' Published: '.$this->post->title,
-            'link' => $this->post->path()
+            'link' => route('post.show', $this->post)
         ];
     }
 }

@@ -1,7 +1,7 @@
 <template>
     <li class="nav-item dropdown" v-if="notifications.length">
         <a id="navbarDropdown4" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-            Notifications!<span class="caret"></span>
+            <i class="fa fa-exclamation pr-1"></i>Notifications<span class="caret"></span>
         </a>
 
         <div class="dropdown-menu" aria-labelledby="navbarDropdown4">
@@ -24,13 +24,13 @@
         },
 
         created() {
-            axios.get("/profiles/" + window.App.user.name + "/notifications")
+            axios.get("/notifications")
                 .then(response => this.notifications = response.data);
         },
 
         methods: {
             markAsRead(notification) {
-                axios.delete("/profiles/"+window.App.user.name+"/notifications/"+notification.id);
+               axios.delete("/notifications/"+notification.id);
 
             }
         }
