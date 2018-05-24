@@ -1,7 +1,20 @@
 <footer class="blog-footer" style="margin-top: 3em;">
-    <p>
-        <a href="#">Back to top</a>
-    </p>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <a href="#" id="return-to-top">Back to top</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+            </div>
+            <div class="col">
+            </div>
+            <div class="col">
+            </div>
+        </div>
+    </div>
+    <p class="text-right small pb-0 mb-0" style="position: relative; bottom: -2em; right: 2em">&#169; 2018 Nathan Haley</p>
 </footer>
 
 @yield('scripts')
@@ -16,6 +29,12 @@
         bg: '#55595c',
         fg: '#eceeef',
         text: 'Thumbnail'
+    });
+
+    $('#return-to-top').click(function() {
+        $('body,html').animate({
+            scrollTop : 0
+        }, 500);
     });
 </script>
 </body>
