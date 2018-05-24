@@ -129,9 +129,13 @@ class PostController extends Controller
      * @param  \App\Post $post
      * @return \Illuminate\Http\Response
      */
-    public function show(Post $post)
+    public function show(Post $post, $notificationId = null)
     {
         $post->visitsIncrement();
+
+        if(isset($notificationId) && auth()->check()) {
+            auth()->user()->notifications()->findOrFail($notificationId)->markAsRead();
+        }
 
         return view('posts.show', compact('post'));
     }

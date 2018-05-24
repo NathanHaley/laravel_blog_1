@@ -1,7 +1,7 @@
 <template>
     <div>
 
-        <create-comment @created="fetch"></create-comment>
+        <create-comment :path="path" @created="fetch"></create-comment>
 
         <paginator :dataSet="dataSet" :totalPages="totalPages" @changed="fetch"></paginator>
 
@@ -22,6 +22,10 @@
 
     export default {
         name: "Comments",
+
+        props: {
+            path: {},
+        },
 
         components: { Comment, CreateComment },
 
@@ -65,7 +69,7 @@
 
                     page = query ? query[1] : 1;
                 }
-                return location.pathname + '/comment?page=' + page;
+                return this.path + '/show/comment?page=' + page;
             },
 
             refresh({data}) {

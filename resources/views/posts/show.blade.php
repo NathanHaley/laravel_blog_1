@@ -67,9 +67,7 @@
             <br>
             <br>
             <div class="col-md-10">
-
-                <comments @added="commentsCount++" @removed="commentsCount--"></comments>
-
+                <comments path="{{ $post->path() }}" @added="commentsCount++" @removed="commentsCount--"></comments>
             </div>
         </div>
     </post-show>

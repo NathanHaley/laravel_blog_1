@@ -18,7 +18,7 @@ class CommentTest extends TestCase
 
         $comment = make('comment', ['post_id' => $post->id, 'user_id' => auth()->id()])->toArray();
 
-        $this->post(route('comment.create', $post), $comment);
+        $this->post(route('comment.store', $post), $comment);
 
         $this->assertEquals($comment['body'], $post->comments->first()->body);
     }
@@ -49,7 +49,7 @@ class CommentTest extends TestCase
 
         $comment = make('comment')->toArray();
 
-        $this->post(route('comment.create', $post), $comment)
+        $this->post(route('comment.store', $post), $comment)
             ->assertRedirect('login');
 
         $this->assertCount(0, $post->comments);

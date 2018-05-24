@@ -65393,7 +65393,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -65424,16 +65424,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "UserNotifications",
 
     data: function data() {
         return {
-            notifications: false,
-            username: window.App.user.name,
-            avatar_path: window.App.user.path
+            notifications: false
         };
     },
     created: function created() {
@@ -65442,13 +65439,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         axios.get("/notifications").then(function (response) {
             return _this.notifications = response.data;
         });
-    },
-
-
-    methods: {
-        markAsRead: function markAsRead(notification) {
-            axios.delete("/notifications/" + notification.id);
-        }
     }
 });
 
@@ -65470,33 +65460,14 @@ var render = function() {
         staticStyle: { border: "1px solid #e5e5e5" }
       },
       _vm._l(_vm.notifications, function(notification) {
-        return _c(
-          "a",
-          {
-            staticClass: "dropdown-item rounded text-muted",
-            staticStyle: { cursor: "pointer" }
+        return _c("a", {
+          staticClass: "dropdown-item rounded text-muted",
+          staticStyle: { cursor: "pointer" },
+          attrs: {
+            href: notification.data.link + "/notification/" + notification.id
           },
-          [
-            _c("avatar", {
-              attrs: {
-                "with-link": "no",
-                username: this.username,
-                avatar_path: this.avatar_path
-              }
-            }),
-            _vm._v(" "),
-            _c("span", {
-              attrs: { href: notification.data.link },
-              domProps: { textContent: _vm._s(notification.data.message) },
-              on: {
-                click: function($event) {
-                  _vm.markAsRead(notification)
-                }
-              }
-            })
-          ],
-          1
-        )
+          domProps: { textContent: _vm._s(notification.data.message) }
+        })
       })
     )
   ])
@@ -65507,9 +65478,10 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "h6 text-center text-muted flex" }, [
-      _vm._v("\n        Your Notifications "),
+      _vm._v("\n        Your Notifications\n        "),
       _c("i", {
-        staticClass: "fa fa-close",
+        staticClass: "fa fa-chevron-circle-up",
+        staticStyle: { cursor: "pointer" },
         attrs: { "data-toggle": "collapse", "data-target": "#demo" }
       })
     ])
@@ -67141,7 +67113,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -67182,6 +67154,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "Comments",
 
+    props: {
+        path: {}
+    },
+
     components: { Comment: __WEBPACK_IMPORTED_MODULE_0__Comment___default.a, CreateComment: __WEBPACK_IMPORTED_MODULE_1__CreateComment___default.a },
 
     mixins: [__WEBPACK_IMPORTED_MODULE_2__mixins_collection__["a" /* default */]],
@@ -67220,7 +67196,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
                 page = query ? query[1] : 1;
             }
-            return location.pathname + '/comment?page=' + page;
+            return this.path + '/show/comment?page=' + page;
         },
         refresh: function refresh(_ref) {
             var data = _ref.data;
@@ -68737,7 +68713,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -68798,6 +68774,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "CreateComment",
 
+    props: {
+        path: {}
+    },
+
     data: function data() {
         return {
             body: '',
@@ -68819,7 +68799,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         addComment: function addComment() {
             var _this = this;
 
-            this.form.post(location.pathname + '/comment').then(function (_ref) {
+            this.form.post(this.path + '/show/comment').then(function (_ref) {
                 var data = _ref.data;
 
                 _this.element.reset();
@@ -69013,7 +68993,10 @@ var render = function() {
   return _c(
     "div",
     [
-      _c("create-comment", { on: { created: _vm.fetch } }),
+      _c("create-comment", {
+        attrs: { path: _vm.path },
+        on: { created: _vm.fetch }
+      }),
       _vm._v(" "),
       _c("paginator", {
         attrs: { dataSet: _vm.dataSet, totalPages: _vm.totalPages },

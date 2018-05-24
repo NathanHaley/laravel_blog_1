@@ -48,6 +48,10 @@
     export default {
         name: "CreateComment",
 
+        props: {
+            path: {},
+        },
+
         data() {
             return {
                 body: '',
@@ -68,7 +72,7 @@
             addComment() {
 
                 this.form
-                    .post(location.pathname + '/comment')
+                    .post(this.path + '/show/comment')
                     .then(({data}) => {
                         this.element.reset();
 

@@ -36,6 +36,7 @@ Route::delete('post/{post}', 'PostController@destroy')->name('post.destroy');
 Route::patch('post/{post}', 'PostController@update');
 Route::post('post', 'PostController@store')->name('post.store');
 Route::get('post/{post}/show', 'PostController@show')->name('post.show');
+Route::get('post/{post}/show/notification/{notification}', 'PostController@show')->name('notification.post.show');
 Route::post('post/{post}/like', 'Api\LikableController@likePost')->name('post.like');
 Route::delete('post/{post}/like', 'Api\LikableController@unlikePost')->name('post.unlike');
 
@@ -50,7 +51,7 @@ Route::get('posts/archive/year/{year}/month/{month}/{user?}', 'PostController@ar
 Route::get('post/{channel}', 'PostController@channel')->name('channel.posts');
 
 Route::get('post/{post}/show/comment', 'Api\CommentController@index')->name('comment.list');
-Route::post('post/{post}/show/comment', 'CommentController@store')->name('comment.create');
+Route::post('post/{post}/show/comment', 'CommentController@store')->name('comment.store');
 Route::patch('comment/{comment}', 'CommentController@update')->name('comment.update');
 Route::delete('comment/{comment}', 'CommentController@destroy')->name('comment.destroy');
 Route::post('comment/{comment}/like', 'CommentController@like')->name('comment.like');
