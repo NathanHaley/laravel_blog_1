@@ -65393,7 +65393,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -65421,12 +65421,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "UserNotifications",
 
     data: function data() {
-        return { notifications: false };
+        return {
+            notifications: false,
+            username: window.App.user.name,
+            avatar_path: window.App.user.path
+        };
     },
     created: function created() {
         var _this = this;
@@ -65452,19 +65460,32 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm.notifications.length
-    ? _c("li", { staticClass: "nav-item dropdown" }, [
-        _vm._m(0),
-        _vm._v(" "),
-        _c(
-          "div",
+  return _c("div", { staticClass: "collapse mb-3", attrs: { id: "demo" } }, [
+    _vm._m(0),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "p-2 rounded-top border-bottom-0",
+        staticStyle: { border: "1px solid #e5e5e5" }
+      },
+      _vm._l(_vm.notifications, function(notification) {
+        return _c(
+          "a",
           {
-            staticClass: "dropdown-menu",
-            attrs: { "aria-labelledby": "navbarDropdown4" }
+            staticClass: "dropdown-item rounded text-muted",
+            staticStyle: { cursor: "pointer" }
           },
-          _vm._l(_vm.notifications, function(notification) {
-            return _c("a", {
-              staticClass: "dropdown-item",
+          [
+            _c("avatar", {
+              attrs: {
+                "with-link": "no",
+                username: this.username,
+                avatar_path: this.avatar_path
+              }
+            }),
+            _vm._v(" "),
+            _c("span", {
               attrs: { href: notification.data.link },
               domProps: { textContent: _vm._s(notification.data.message) },
               on: {
@@ -65473,36 +65494,25 @@ var render = function() {
                 }
               }
             })
-          })
+          ],
+          1
         )
-      ])
-    : _vm._e()
+      })
+    )
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "a",
-      {
-        pre: true,
-        attrs: {
-          id: "navbarDropdown4",
-          class: "nav-link dropdown-toggle",
-          href: "#",
-          role: "button",
-          "data-toggle": "dropdown",
-          "aria-haspopup": "true",
-          "aria-expanded": "false"
-        }
-      },
-      [
-        _c("i", { attrs: { class: "fa fa-exclamation pr-1" } }),
-        _vm._v("Notifications"),
-        _c("span", { attrs: { class: "caret" } })
-      ]
-    )
+    return _c("div", { staticClass: "h6 text-center text-muted flex" }, [
+      _vm._v("\n        Your Notifications "),
+      _c("i", {
+        staticClass: "fa fa-close",
+        attrs: { "data-toggle": "collapse", "data-target": "#demo" }
+      })
+    ])
   }
 ]
 render._withStripped = true

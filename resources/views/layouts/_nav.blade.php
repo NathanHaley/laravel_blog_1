@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light mb-3">
+<nav class="navbar navbar-expand-lg navbar-light mb-2">
     <div class="container">
 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -48,18 +48,27 @@
                         @endforeach
                     </div>
                 </li>
-
-                <user-notifications></user-notifications>
             </ul>
             <!-- Right Side Of Navbar -->
             <ul class="navbar-nav ml-auto">
                 <!-- Authentication Links -->
                 @auth
+                    @if(auth()->user()->unreadNotifications()->count() > 0)
+                        <button id="nav_notifications" data-toggle="collapse" data-target="#demo" class="btn btn-link nav-item nav-link">
+                            <span class="nav-link">
+                                <i class="fa fa-exclamation-circle"></i>
+                                Notifications
+                                <span class="caret"></span>
+                            </span>
+                        </button>
+                    @endif
                     <li class="nav-item dropdown">
-                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                            <avatar with-link="no" id="nav_avatar" username="{{ auth()->user()->name }}"
-                                    avatar_path="{{ auth()->user()->avatar_path }}"></avatar>
+                        <a id="navbarDropdown" class="nav-link" href="#" role="button"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img src="{{ auth()->user()->avatar_path }}"
+                                 id="nav_avatar"
+                                 class="relative rounded-circle"
+                                 style="width: 2em;">
                             <span class="caret"></span>
                         </a>
 
@@ -86,3 +95,4 @@
         </div>
     </div>
 </nav>
+@if(auth()->check() && auth()->user()->unreadNotifications()->count() > 0)<user-notifications></user-notifications>@endif

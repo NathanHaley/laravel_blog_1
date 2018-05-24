@@ -1,18 +1,22 @@
 <template>
-    <li class="nav-item dropdown" v-if="notifications.length">
-        <a id="navbarDropdown4" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-            <i class="fa fa-exclamation pr-1"></i>Notifications<span class="caret"></span>
-        </a>
-
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown4">
-            <a class="dropdown-item"
-               v-for="notification in notifications"
-               :href="notification.data.link"
-               v-text="notification.data.message"
-               @click="markAsRead(notification)"
-                ></a>
+    <div id="demo" class="collapse mb-3">
+        <div class="h6 text-center text-muted flex">
+            Your Notifications <i data-toggle="collapse" data-target="#demo" class="fa fa-close"></i>
         </div>
-    </li>
+        <div  class="p-2 rounded-top border-bottom-0" style="border: 1px solid #e5e5e5">
+            <a class="dropdown-item rounded text-muted" style="cursor:pointer;" v-for="notification in notifications">
+                <avatar with-link="no"
+                        :username="this.username"
+                        :avatar_path="this.avatar_path">
+                </avatar>
+                <span
+                        :href="notification.data.link"
+                        v-text="notification.data.message"
+                        @click="markAsRead(notification)"
+                ></span>
+            </a>
+        </div>
+    </div>
 </template>
 
 <script>
@@ -20,7 +24,11 @@
         name: "UserNotifications",
 
         data() {
-            return { notifications: false }
+            return {
+                notifications: false,
+                username: window.App.user.name,
+                avatar_path: window.App.user.path
+            }
         },
 
         created() {
@@ -30,8 +38,7 @@
 
         methods: {
             markAsRead(notification) {
-               axios.delete("/notifications/"+notification.id);
-
+                axios.delete("/notifications/" + notification.id);
             }
         }
     }
