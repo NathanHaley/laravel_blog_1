@@ -8,20 +8,17 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <!-- Left Side Of Navbar -->
-            @auth
-                <ul class="navbar-nav">
-                    <li><a class="nav-link" href="{{route('post.create')}}">Create Post</a></li>
-                </ul>
-            @endauth
-
             <ul class="navbar-nav">
-                @foreach($channels as $channel)
-                    <li><a class="nav-link" style="color: {{ $channel->color }}" href="{{ route('channel.posts', $channel) }}">{{ $channel->name }}</a></li>
-                @endforeach
-            </ul>
+                @auth
+                    <li><a class="nav-link" href="{{route('post.create')}}">Create Post</a></li>
+                @endauth
 
-            @can('view', auth()->user(), \App\Channel::class)
-                <ul class="navbar-nav">
+                @foreach($channels as $channel)
+                    <li><a class="nav-link" style="color: {{ $channel->color }}"
+                           href="{{ route('channel.posts', $channel) }}">{{ $channel->name }}</a></li>
+                @endforeach
+
+                @can('view', auth()->user(), \App\Channel::class)
                     <li class="nav-item dropdown">
                         <a id="navbarDropdown1" class="nav-link dropdown-toggle" href="#" role="button"
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -33,9 +30,8 @@
                             <a class="dropdown-item" href="{{ route('admin.channel.create') }}">Create</a>
                         </div>
                     </li>
-                </ul>
-        @endcan
-            <ul class="navbar-nav">
+                @endcan
+
                 <li class="nav-item dropdown">
                     <a id="navbarDropdown2" class="nav-link dropdown-toggle" href="#" role="button"
                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -52,14 +48,13 @@
                         @endforeach
                     </div>
                 </li>
-            </ul>
 
-        <!-- Right Side Of Navbar -->
+                <user-notifications></user-notifications>
+            </ul>
+            <!-- Right Side Of Navbar -->
             <ul class="navbar-nav ml-auto">
                 <!-- Authentication Links -->
                 @auth
-                    <user-notifications></user-notifications>
-
                     <li class="nav-item dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
