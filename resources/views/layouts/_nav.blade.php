@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md navbar-light mb-3">
+<nav class="navbar navbar-expand-lg navbar-light mb-3">
     <div class="container">
 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
