@@ -1,6 +1,7 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\Api\Auth;
+
 
 
 use App\User;
@@ -8,10 +9,10 @@ use Illuminate\Http\Request;
 use App\Mail\PleaseConfirmYourEmail;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Foundation\Auth\RegistersUsers;
 
-class RegisterController extends ApiController
+class RegisterController extends Controller
 {
     /*
     |--------------------------------------------------------------------------

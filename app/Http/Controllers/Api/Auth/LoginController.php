@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\Api\Auth;
 
-use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use App\Http\Controllers\Controller;
 
-class LoginController extends ApiController
+class LoginController extends Controller
 {
     /*
     |--------------------------------------------------------------------------

@@ -22,8 +22,8 @@ Auth::routes();
 Route::get('/', 'HomeController@index');
 Route::get('home', 'HomeController@index')->name('home'); //TODO: Remove this?
 Route::get('/register/confirm', 'Auth\RegisterConfirmationController@index')->name('register.confirm');
-Route::post('api/register', 'Api\RegisterController@register')->name('api.register');
-Route::post('api/login', 'Api\LoginController@login')->name('api.login');
+Route::post('api/register', 'Api\Auth\RegisterController@register')->name('api.register');
+Route::post('api/login', 'Api\Auth\LoginController@login')->name('api.login');
 
 /**
  * |--------------------------------------------------------------------------

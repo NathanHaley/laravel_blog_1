@@ -4,9 +4,10 @@ namespace App\Http\Controllers\Api;
 
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Resources\Json\ResourceCollection;
 use Illuminate\Support\Facades\Response;
 use Symfony\Component\HttpFoundation\Response as Http;
+use Illuminate\Http\Resources\Json\ResourceCollection;
+
 
 class ApiController extends Controller
 {
