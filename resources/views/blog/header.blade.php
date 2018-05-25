@@ -1,9 +1,18 @@
 <header class="blog-header py-3">
     @if(Auth::check() && Auth::user()->confirmed == false)
+        @if(session()->pull('newUser', false))
+            <div class="alert alert-success" role="alert">
+                <strong>
+                    <i class="fa fa-check fa-2x mr-2"></i>
+                </strong>
+                Welcome, new member!
+            </div>
+        @endif
         <div class="alert alert-warning" role="alert">
             <strong>
                 <i class="fa fa-exclamation fa-2x mr-2"></i>
-            </strong>You still need to <strong>verify your email</strong> to participate (e.g. use likes). Please check your email for our verification message.
+            </strong>You still need to <strong>verify your email</strong> to participate (e.g. use likes). Please check
+            your email for our verification message.
         </div>
     @endif
     <div class="row justify-content-between align-items-center">
@@ -20,10 +29,13 @@
             @guest
                 <header-login-registration-form inline-template>
                     <span>
-                        <button class="btn btn-sm btn-outline-secondary mr-3" @click="$refs.modalHeaderLoginPrompt.open()">Login</button>
-                        <button class="btn btn-sm btn-outline-secondary" @click="$refs.modalHeaderLoginPrompt.open('tab2');">Register</button>
+                        <button class="btn btn-sm btn-outline-secondary mr-3"
+                                @click="$refs.modalHeaderLoginPrompt.open()">Login</button>
+                        <button class="btn btn-sm btn-outline-secondary"
+                                @click="$refs.modalHeaderLoginPrompt.open('tab2');">Register</button>
 
-                        <sweet-modal v-cloak ref="modalHeaderLoginPrompt" title="<center style='font-family: Arial' class='mt-3'>Login or Register</center>">
+                        <sweet-modal v-cloak ref="modalHeaderLoginPrompt"
+                                     title="<center style='font-family: Arial' class='mt-3'>Login or Register</center>">
 
                             <sweet-modal-tab title="Login" id="tab1">
                                 <p class="h4 text-center mb-3">Login</p>

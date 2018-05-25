@@ -10,6 +10,7 @@ use App\Mail\PleaseConfirmYourEmail;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
@@ -78,6 +79,8 @@ class RegisterController extends Controller
     protected function registered(Request $request, $user)
     {
         Mail::to($user)->send(new PleaseConfirmYourEmail($user));
+
+        Session::put(['newUser' => true]);
 
         //return redirect($this->redirectPath());
     }
