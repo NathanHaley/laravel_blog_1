@@ -1,7 +1,9 @@
 <header class="blog-header py-3">
     @if(Auth::check() && Auth::user()->confirmed == false)
         <div class="alert alert-warning" role="alert">
-            <strong><i class="fa fa-exclamation fa-2x mr-2"></i></strong> You still need to <strong>verify your email</strong> to participate (e.g. use likes). Please check you email for our verification message.
+            <strong>
+                <i class="fa fa-exclamation fa-2x mr-2"></i>
+            </strong>You still need to <strong>verify your email</strong> to participate (e.g. use likes). Please check your email for our verification message.
         </div>
     @endif
     <div class="row justify-content-between align-items-center">
