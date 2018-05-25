@@ -145,7 +145,7 @@
         methods: {
             submitRegistration() {
                 this.form
-                    .post('/register')
+                    .post('/api/register')
                     .then(({data}) => {
                         this.handleSubmit();
                     });
@@ -154,7 +154,7 @@
             handleSubmit() {
                 this.loading = true;
                 setTimeout(function () {
-                    location.reload()
+                    location.reload(true);
                 }, 1000);
             }
         }

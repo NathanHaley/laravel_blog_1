@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 class HomeController extends Controller
 {
@@ -38,7 +39,6 @@ class HomeController extends Controller
         $cards = Post::where(['featured_card' => true, 'locked' => false])->orderby('created_at')->paginate(2);
 
         $archives = Post::archives2(1);
-
 
         return view('index', compact('posts', 'banner', 'cards', 'archives'));
     }

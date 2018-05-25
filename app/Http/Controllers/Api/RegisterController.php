@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers\Api;
+
 
 use App\User;
-use App\Mail\PleaseConfirmYourEmail;
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Mail\PleaseConfirmYourEmail;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
-class RegisterController extends Controller
+class RegisterController extends ApiController
 {
     /*
     |--------------------------------------------------------------------------
@@ -25,14 +25,6 @@ class RegisterController extends Controller
     */
 
     use RegistersUsers;
-
-    /**
-     * Where to redirect users after registration.
-     *
-     * @var string
-     */
-    //TODO: Maybe this should direct to a better location
-    protected $redirectTo = 'home';
 
     /**
      * Create a new controller instance.
@@ -86,6 +78,6 @@ class RegisterController extends Controller
     {
         Mail::to($user)->send(new PleaseConfirmYourEmail($user));
 
-        return redirect($this->redirectPath());
+        //return redirect($this->redirectPath());
     }
 }
