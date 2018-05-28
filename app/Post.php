@@ -47,6 +47,11 @@ class Post extends Model
     /**
      * @var array
      */
+    protected $with = ['user', 'likes'];
+
+    /**
+     * @var array
+     */
     protected $casts = [
         'created_at' => 'datetime',
         'updated_at' => 'datetime'
@@ -254,7 +259,7 @@ class Post extends Model
      */
     static function breakPoint(int $monthsBack = 1)
     {
-        return Post::orderby('created_at', 'desc')->pluck('created_at')->first()->subMonths($monthsBack);
+        return (new Carbon(Post::max('created_at')))->subMonth($monthsBack);
     }
 
     /**

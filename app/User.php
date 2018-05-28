@@ -33,6 +33,11 @@ class User extends Authenticatable
     protected $appends = ['path', 'isLiked', 'likedCount'];
 
     /**
+     * @var array
+     */
+    protected $with = [];
+
+    /**
      * The attributes that should be hidden for arrays.
      *
      * @var array

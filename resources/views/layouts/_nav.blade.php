@@ -53,7 +53,7 @@
             <ul class="navbar-nav ml-auto">
                 <!-- Authentication Links -->
                 @auth
-                    @if(auth()->user()->unreadNotifications()->count() > 0)
+                    @if(auth()->user()->unreadNotifications->count() > 0)
                         <button id="nav_notifications" data-toggle="collapse" data-target="#demo" class="btn btn-link nav-item nav-link">
                             <span class="nav-link">
                                 <i class="fa fa-exclamation-circle"></i>
@@ -95,4 +95,4 @@
         </div>
     </div>
 </nav>
-@if(auth()->check() && auth()->user()->unreadNotifications()->count() > 0)<user-notifications></user-notifications>@endif
+@if(auth()->check() && auth()->user()->unreadNotifications->count() > 0)<user-notifications></user-notifications>@endif
