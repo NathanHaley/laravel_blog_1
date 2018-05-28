@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Permission;
 use App\Post;
 use App\User;
 use App\Channel;
@@ -40,8 +41,24 @@ class AuthServiceProvider extends ServiceProvider
             if ($user->isAdmin()) return true;
         });
 
+        foreach ($this->getPermissions() as $permission) {
+            Gate::define($permission->name, function ($user) use ($permission){
+                return $user->hasPermission($permission);
+            });
+         }
+
         $this->registerPolicies();
 
         //
+    }
+
+    /**
+     * Fetch the collection of site permissions.
+     *
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    protected function getPermissions()
+    {
+        return Permission::with('roles')->get();
     }
 }
