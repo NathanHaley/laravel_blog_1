@@ -78,7 +78,7 @@ trait LikableTrait
 
     public function isLiked()
     {
-        return !!$this->likes->where('user_id', auth()->id())->count();
+        return !! $this->likes->where('user_id', auth()->id())->count();
     }
 
     public function getIsLikedAttribute()
@@ -86,6 +86,7 @@ trait LikableTrait
         return $this->isLiked();
     }
 
+    // TODO: See about removing if using likes_count on all implementing model tables
     public function getLikedCountAttribute()
     {
         return $this->likes->count();

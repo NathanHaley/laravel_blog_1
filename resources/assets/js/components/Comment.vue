@@ -11,7 +11,7 @@
                 <span class="h5 text-muted small text-nowrap" v-text="ago"></span>
             </span>
 
-            <div v-if="signedIn" class="ml-auto">
+            <div class="ml-auto">
                 <like-button
                         :path="comment.path"
                         :likes-count="comment.likes_count"

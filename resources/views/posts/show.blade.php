@@ -35,6 +35,7 @@
                     <span class="ml-auto mr-3">
                         <small class="text-muted">visits:</small> {{ $post->visits }}
                     </span>
+
                     @auth
                         <like-button
                                 add-classes="h-25"
@@ -45,17 +46,15 @@
                     @endauth
 
                     @can('update', $post)
-
                         <a href="{{ route('post.edit', $post) }}" class="btn btn-outline-primary h-25 ml-3">Edit</a>
-
                     @endcan
                     @can('delete', $post)
                         <a href="{{ route('post.delete', $post) }}" class="btn btn-outline-danger h-25 ml-3">Delete</a>
                     @endcan
 
-
                 </div>
                 <br>
+
                 @if($post->banner_path != null)
                     <div class="rounded h-250 post_banner"></div>
                 @endif

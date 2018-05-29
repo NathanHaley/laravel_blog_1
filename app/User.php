@@ -30,7 +30,7 @@ class User extends Authenticatable
     /**
      * @var array
      */
-    protected $appends = ['path', 'isLiked', 'likedCount'];
+    protected $appends = ['path', 'isLiked'];
 
     /**
      * @var array

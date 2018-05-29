@@ -42,12 +42,12 @@ class Post extends Model
     /**
      * @var array
      */
-    protected $appends = ['likedCount'];
+    protected $appends = ['isLiked'];
 
     /**
      * @var array
      */
-    protected $with = ['user', 'likes'];
+    protected $with = ['user', 'channel', 'likes'];
 
     /**
      * @var array

@@ -25,7 +25,7 @@ class CommentController extends ApiController
     public function index(Post $post)
     {
 
-        $comments = $post->comments()->with('user')->paginate(5);
+        $comments = $post->comments()->paginate(5);
         $commentsCollection = new CommentCollection($comments);
 
         return $this->respond($commentsCollection);

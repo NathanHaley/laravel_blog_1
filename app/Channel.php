@@ -19,7 +19,8 @@ class Channel extends Model
     protected $fillable = [
         'name',
         'description',
-        'color'
+        'color',
+        'created_at'
     ];
 
     /**
