@@ -1,5 +1,5 @@
 <template>
-    <span>
+    <div>
 
         <sweet-modal ref="modalLoginPrompt" title="<center style='font-family: Arial' class='mt-3'>Please login or register to participate</center>">
 
@@ -15,14 +15,12 @@
 
         </sweet-modal>
 
-
-
         <button :class="classes" @click="toggle" style="border:0;">
             <span class="fa fa-heart"></span>
             <span v-text="allLikesCount"></span>
         </button>
 
-    </span>
+    </div>
 </template>
 <script>
     export default {

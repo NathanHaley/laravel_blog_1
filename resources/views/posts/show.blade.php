@@ -32,18 +32,22 @@
                         @include('layouts._follow-button', $user = $post->user)
                     </span>
 
-                    <span class="ml-auto mr-3">
-                        <small class="text-muted">visits:</small> {{ $post->visits }}
+                    <span class="ml-auto mr-3 text-center">
+                        <small class="text-muted">visits</small><br>{{ $post->visits }}
                     </span>
 
-                    @auth
-                        <like-button
-                                add-classes="h-25"
-                                path="{{ $post->path() }}"
-                                likes-count="{{ $post->likes_count }}"
-                                :is-liked="{{ json_encode($post->isLiked) }}">
-                        </like-button>
-                    @endauth
+                    <span class="rounded-circle text-nowrap p-2">
+                        <i class="fa fa-comment"></i>
+                        {{ $post->comments_count }}
+                    </span>
+
+                    <like-button
+                            add-classes="h-25"
+                            path="{{ $post->path() }}"
+                            likes-count="{{ $post->likes_count }}"
+                            :is-liked="{{ json_encode($post->isLiked) }}">
+                    </like-button>
+
 
                     @can('update', $post)
                         <a href="{{ route('post.edit', $post) }}" class="btn btn-outline-primary h-25 ml-3">Edit</a>
